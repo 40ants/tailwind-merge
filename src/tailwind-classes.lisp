@@ -9,59 +9,6 @@
 (in-package #:tailwind-merge/tailwind-classes)
 
 
-(defvar *classes* nil)
-
-
-(defclass tailwind-class ()
-  ())
-
-
-(defclass padding ()
-  ((left :initarg :left
-         :reader padding-left)
-   (right :initarg :right
-          :reader padding-right)
-   (top :initarg :top
-        :reader padding-top)
-   (bottom :initarg :bottom
-           :reader padding-bottom)))
-
-
-(defun parse-full-padding (prefix value)
-  (declare (ignore prefix))
-  (make-instance 'padding
-                 :left value
-                 :top value
-                 :right value
-                 :bottom value))
-
-
-(defun parse-x-padding (prefix value)
-  (declare (ignore prefix))
-  (make-instance 'padding
-                 :left value
-                 :right value))
-
-
-(defun parse-y-padding (prefix value)
-  (declare (ignore prefix))
-  (make-instance 'padding
-                 :top value
-                 :bottom value))
-
-
-(defparameter *parsers*
-  (dict "p" #'parse-full-padding
-        "px" #'parse-x-padding
-        "py" #'parse-y-padding
-        ;; "pl" #'parse-l-padding
-        ;; "pt" #'parse-t-padding
-        ;; "pr" #'parse-r-padding
-        ;; "pb" #'parse-b-padding
-        ))
-
-
-
 (defparameter *classes*
   '((:px)
     (:py)
