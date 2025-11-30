@@ -33,12 +33,18 @@
     (:border-width (:border null)) ;; This is for processing "border" class
     (:border-width (:border integer-value-p)) ;; When we have border-2, border-3, etc, this is boder-width too
     (:border-color (:border
-                    ;; Tailwind color predicate function should be created instead
+                    ;; Tailwind color predicate function should be created instead:
                     :red
                     :green))
     (:text-color (:text :red :green))
-    (:text-size (:text :xl :2xl))
-    (:text-align :text-left :text-center)))
+    (:text-size (:text
+                 ;; Tailwind sizes predicate function should be created instead:
+                 :xl :2xl))
+    ;; These are conflicting classes.
+    ;; First list item is a class group name, rest of the list - conflicting class names.
+    (:text-align :text-left :text-center)
+    (:items-align :items-start :items-center :items-end)
+    (:justify-items :justify-items-start :justify-items-center :justify-items-end)))
 
 
 (-> make-validators-from-rule (list)
