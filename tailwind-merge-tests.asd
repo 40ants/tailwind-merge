@@ -7,7 +7,8 @@
   :source-control (:git "https://github.com/40ants/tailwind-merge")
   :bug-tracker "https://github.com/40ants/tailwind-merge/issues"
   :pathname "t"
-  :depends-on ("tailwind-merge-tests/core")
+  :depends-on ("hamcrest"
+               "tailwind-merge-tests/core")
   :perform (test-op (op c)
                     (unless (symbol-call :rove :run c)
                       (error "Tests failed"))))

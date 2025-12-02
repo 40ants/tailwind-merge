@@ -1205,6 +1205,7 @@
         for class in (reverse classes)
         for parsed = (parse-class class)
         unless (gethash parsed seen-classes)
-          collect class
+          collect class into results
           and do (setf (gethash parsed seen-classes)
-                       t)))
+                       t)
+        finally (return (nreverse results))))
