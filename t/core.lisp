@@ -60,17 +60,15 @@
 
 
 (deftest test-merge-tailwind-classes-arbitrary-values
-  (testing (ok "Arbitrary values are not supported yet"))
-  ;; (testing "Arbitrary values"
-  ;;   (assert-that
-  ;;    (merge-tailwind-classes '("stroke-2" "stroke-[3]"))
-  ;;    (contains "stroke-[3]"))
+  (testing "Arbitrary values"
+    (assert-that
+     (merge-tailwind-classes '("stroke-2" "stroke-[3]"))
+     (contains "stroke-[3]"))
 
-  ;;   (assert-that
-  ;;    (merge-tailwind-classes '("grayscale-0" "grayscale-[50%]"))
-  ;;    (contains "grayscale-[50%]"))
+    (assert-that
+     (merge-tailwind-classes '("grayscale-0" "grayscale-[50%]"))
+     (contains "grayscale-[50%]"))
 
-  ;;   (assert-that
-  ;;    (merge-tailwind-classes '("grow" "grow-[2]"))
-  ;;    (contains "grow-[2]")))
-  )
+    (assert-that
+     (merge-tailwind-classes '("grow" "grow-[2]"))
+     (contains "grow-[2]"))))

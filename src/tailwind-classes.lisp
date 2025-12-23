@@ -7,7 +7,12 @@
   (:import-from #:alexandria
                 #:curry)
   (:import-from #:parse-number
-                #:parse-number))
+                #:parse-number)
+  (:import-from #:tailwind-merge/arbitrary
+                #:arbitrary-value-p
+                #:arbitrary-variable-p
+                #:arbitrary-number-p
+                #:arbitrary-length-p))
 (in-package #:tailwind-merge/tailwind-classes)
 
 
@@ -230,7 +235,9 @@
 
     ;; Flex Grow
     (:grow (:grow null)
-           (:grow number-value-p))
+           (:grow number-value-p)
+           (:grow arbitrary-value-p)
+           (:grow arbitrary-variable-p))
 
     ;; Flex Shrink
     (:shrink (:shrink null)
@@ -752,7 +759,9 @@
 
     ;; Grayscale
     (:grayscale (:grayscale null)
-                (:grayscale number-value-p))
+                (:grayscale number-value-p)
+                (:grayscale arbitrary-value-p)
+                (:grayscale arbitrary-variable-p))
 
     ;; Hue Rotate
     (:hue-rotate (:hue-rotate number-value-p))
@@ -1005,7 +1014,10 @@
     (:fill (:fill :none)) ;; Would need color validator for other values
 
     ;; Stroke Width
-    (:stroke-w (:stroke number-value-p))
+    (:stroke-w (:stroke number-value-p)
+               (:stroke arbitrary-number-p)
+               (:stroke arbitrary-length-p)
+               (:stroke arbitrary-variable-p))
 
     ;; Stroke
     (:stroke (:stroke :none)) ;; Would need color validator for other values
