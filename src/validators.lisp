@@ -2,22 +2,14 @@
   (:use #:cl)
   (:import-from #:serapeum
                 #:->)
-  (:import-from #:alexandria
-                #:curry)
   (:import-from #:parse-number
                 #:parse-number)
-  (:import-from #:tailwind-merge/arbitrary
-                #:arbitrary-value-p
-                #:arbitrary-variable-p
-                #:arbitrary-number-p
-                #:arbitrary-length-p)
-  (:export
-   #:integer-value-p
-   #:number-value-p
-   #:fraction-value-p
-   #:tshirt-size-p
-   #:percent-value-p
-   #:empty-or-number-p))
+  (:export #:integer-value-p
+           #:number-value-p
+           #:fraction-value-p
+           #:tshirt-size-p
+           #:percent-value-p
+           #:empty-or-number-p))
 
 (in-package #:tailwind-merge/validators)
 
