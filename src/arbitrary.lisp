@@ -43,7 +43,7 @@
 ;;; ============================================================================
 
 (defun parse-arbitrary-value (value)
-  "Parse an arbitrary value in square brackets format: [label:content] or [content].
+  "Parse an arbitrary value in square brackets format: `[label:content]` or `[content]`.
    Returns (values matched-p label content) where label may be NIL."
   (when (and value
              (>= (length value) 3)
@@ -63,7 +63,7 @@
 
 
 (defun parse-arbitrary-variable (value)
-  "Parse an arbitrary variable in parentheses format: (label:content) or (content).
+  "Parse an arbitrary variable in parentheses format: `(label:content)` or `(content)`.
    Returns (values matched-p label content) where label may be NIL."
   (when (and value
              (>= (length value) 3)
@@ -142,7 +142,7 @@
 
 
 (defun extract-function-name (value)
-  "Extract function name from a CSS function call like 'rgb(...)'.
+  "Extract function name from a CSS function call like `rgb(...)`.
    Returns NIL if not a function call."
   (let ((paren-pos (position #\( value)))
     (when (and paren-pos
@@ -174,7 +174,7 @@
 
 (defun content-is-length-p (content)
   "Check if CONTENT looks like a CSS length value.
-   Matches values like '100px', '2rem', '50%', 'calc(...)', etc.
+   Matches values like `100px`, `2rem`, `50%`, `calc(...)`, etc.
    Excludes color functions that might contain percentages."
   (when (and content (> (length content) 0))
     ;; Check if it's a color function first (exclude these)
@@ -205,7 +205,7 @@
 
 (defun content-is-image-p (content)
   "Check if CONTENT looks like a CSS image value.
-   Matches url(), gradient functions, etc."
+   Matches `url()`, gradient functions, etc."
   (when content
     (let ((func-name (extract-function-name content)))
       (when func-name
@@ -217,7 +217,7 @@
   "Check if CONTENT looks like a CSS shadow value.
    Shadow values typically start with x and y offsets separated by underscore,
    optionally prepended by 'inset_'.
-   Pattern: (inset_)?-?offset_-?offset..."
+   Pattern: `(inset_)?-?offset_-?offset...`"
   (when (and content (> (length content) 0))
     (let* ((parts (split-string content #\_))
            (start-idx 0))
@@ -308,7 +308,7 @@
 
 (defun arbitrary-length-p (value)
   "Check if VALUE is an arbitrary length value.
-   Matches [length:...] or [content] where content looks like a length."
+   Matches `[length:...]` or `[content]` where content looks like a length."
   (multiple-value-bind (matched label content)
       (parse-arbitrary-value value)
     (when matched
@@ -319,7 +319,7 @@
 
 (defun arbitrary-number-p (value)
   "Check if VALUE is an arbitrary number value.
-   Matches [number:...] or [content] where content is a number."
+   Matches `[number:...]` or `[content]` where content is a number."
   (multiple-value-bind (matched label content)
       (parse-arbitrary-value value)
     (when matched
@@ -330,7 +330,7 @@
 
 (defun arbitrary-position-p (value)
   "Check if VALUE is an arbitrary position value.
-   Only matches [position:...] or [percentage:...] labels.
+   Only matches `[position:...]` or `[percentage:...]` labels.
    Position cannot be auto-detected from content."
   (multiple-value-bind (matched label content)
       (parse-arbitrary-value value)
@@ -341,7 +341,7 @@
 
 (defun arbitrary-image-p (value)
   "Check if VALUE is an arbitrary image value.
-   Matches [image:...], [url:...] or [content] where content is an image function."
+   Matches `[image:...]`, `[url:...]` or `[content]` where content is an image function."
   (multiple-value-bind (matched label content)
       (parse-arbitrary-value value)
     (when matched
@@ -352,7 +352,7 @@
 
 (defun arbitrary-shadow-p (value)
   "Check if VALUE is an arbitrary shadow value.
-   Matches [shadow:...] or [content] where content looks like a shadow."
+   Matches `[shadow:...]` or `[content]` where content looks like a shadow."
   (multiple-value-bind (matched label content)
       (parse-arbitrary-value value)
     (when matched
@@ -363,7 +363,7 @@
 
 (defun arbitrary-size-p (value)
   "Check if VALUE is an arbitrary size value.
-   Only matches [length:...], [size:...], or [bg-size:...] labels.
+   Only matches `[length:...]`, `[size:...]`, or `[bg-size:...]` labels.
    Size cannot be auto-detected from content alone."
   (multiple-value-bind (matched label content)
       (parse-arbitrary-value value)
@@ -378,7 +378,7 @@
 
 (defun arbitrary-variable-length-p (value)
   "Check if VALUE is an arbitrary variable with length type.
-   Matches (length:...)."
+   Matches `(length:...)`."
   (multiple-value-bind (matched label content)
       (parse-arbitrary-variable value)
     (declare (ignore content))
@@ -388,7 +388,7 @@
 
 (defun arbitrary-variable-position-p (value)
   "Check if VALUE is an arbitrary variable with position type.
-   Matches (position:...) or (percentage:...)."
+   Matches `(position:...)` or `(percentage:...)`."
   (multiple-value-bind (matched label content)
       (parse-arbitrary-variable value)
     (declare (ignore content))
@@ -398,7 +398,7 @@
 
 (defun arbitrary-variable-image-p (value)
   "Check if VALUE is an arbitrary variable with image type.
-   Matches (image:...) or (url:...)."
+   Matches `(image:...)` or `(url:...)`."
   (multiple-value-bind (matched label content)
       (parse-arbitrary-variable value)
     (declare (ignore content))
@@ -408,7 +408,7 @@
 
 (defun arbitrary-variable-shadow-p (value &optional (match-no-label t))
   "Check if VALUE is an arbitrary variable with shadow type.
-   Matches (shadow:...) or any variable if MATCH-NO-LABEL is true."
+   Matches `(shadow:...)` or any variable if MATCH-NO-LABEL is true."
   (multiple-value-bind (matched label content)
       (parse-arbitrary-variable value)
     (declare (ignore content))
@@ -420,7 +420,7 @@
 
 (defun arbitrary-variable-size-p (value)
   "Check if VALUE is an arbitrary variable with size type.
-   Matches (length:...), (size:...), or (bg-size:...)."
+   Matches `(length:...)`, `(size:...)`, or `(bg-size:...)`."
   (multiple-value-bind (matched label content)
       (parse-arbitrary-variable value)
     (declare (ignore content))
@@ -430,7 +430,7 @@
 
 (defun arbitrary-variable-family-name-p (value)
   "Check if VALUE is an arbitrary variable with family-name type.
-   Matches (family-name:...)."
+   Matches `(family-name:...)`."
   (multiple-value-bind (matched label content)
       (parse-arbitrary-variable value)
     (declare (ignore content))
