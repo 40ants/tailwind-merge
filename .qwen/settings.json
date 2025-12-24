@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "httpServer": {
+      "httpUrl": "http://localhost:10900/mcp",
+      "timeout": 5000
+    }
+  },
+  "$version": 2
+}
