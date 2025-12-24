@@ -2,8 +2,6 @@
   (:use #:cl)
   (:import-from #:tailwind-merge/tailwind-classes
                 #:merge-tailwind-classes)
-  (:import-from #:tailwind-merge
-                #:tw-join)
   (:import-from #:rove
                 #:deftest
                 #:ok
@@ -13,14 +11,6 @@
   (:import-from #:hamcrest/rove
                 #:assert-that))
 (in-package #:tailwind-merge-tests/core)
-
-
-(deftest test-tw-join
-  (testing "Basic class joining"
-    (ok (string= (tw-join "foo" "bar") "foo bar"))
-    (ok (string= (tw-join "foo" nil "bar") "foo bar"))
-    (ok (string= (tw-join "foo" "" "bar") "foo bar"))
-    (ok (string= (tw-join) ""))))
 
 
 (deftest test-merge-tailwind-classes-basic
