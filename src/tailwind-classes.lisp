@@ -63,11 +63,12 @@
   "Matches t-shirt sizes like xs, sm, md, lg, xl, 2xl, 3xl, etc."
   (when value
     (let ((val (string-downcase value)))
-      (or (member val '("xs" "sm" "md" "lg" "xl") :test #'string=)
-          ;; Match 2xl, 3xl, etc.
-          (and (>= (length val) 3)
-               (string= (subseq val (- (length val) 2)) "xl")
-               (every #'digit-char-p (subseq val 0 (- (length val) 2))))))))
+      (when (or (member val '("xs" "sm" "md" "lg" "xl") :test #'string=)
+                ;; Match 2xl, 3xl, etc.
+                (and (>= (length val) 3)
+                     (string= (subseq val (- (length val) 2)) "xl")
+                     (every #'digit-char-p (subseq val 0 (- (length val) 2)))))
+        t))))
 
 
 (-> percent-value-p ((or null string))
