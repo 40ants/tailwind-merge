@@ -1157,21 +1157,26 @@
    Non-conflicting classes are preserved in the output.
 
    Args:
-     classes: A list of strings representing Tailwind CSS classes.
+
+   - CLASSES: A list of strings representing Tailwind CSS classes.
 
    Returns:
-     A list of strings with conflicting classes resolved, keeping only the last
-     class in case of conflicts.
+
+   A list of strings with conflicting classes resolved, keeping only the last
+   class in case of conflicts.
 
    Examples:
-     (merge-tailwind-classes '(\"px-2\" \"px-3\"))
-     ;; => (\"px-3\")
 
-     (merge-tailwind-classes '(\"py-2\" \"px-3\"))
-     ;; => (\"py-2\" \"px-3\")
+   ```lisp
+   (merge-tailwind-classes '(\"px-2\" \"px-3\"))
+   ;; => (\"px-3\")
 
-     (merge-tailwind-classes '(\"bg-red-500\" \"bg-blue-500\"))
-     ;; => (\"bg-blue-500\")
+   (merge-tailwind-classes '(\"py-2\" \"px-3\"))
+   ;; => (\"py-2\" \"px-3\")
+
+   (merge-tailwind-classes '(\"bg-red-500\" \"bg-blue-500\"))
+   ;; => (\"bg-blue-500\")
+   ```
    "
   (loop with seen-classes = (dict)
         for class in (reverse classes)

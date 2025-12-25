@@ -86,37 +86,37 @@ The TAILWIND-MERGE/TAILWIND-CLASSES:MERGE-TAILWIND-CLASSES function allows you t
 ```lisp
 ;; Basic class merging - conflicting classes are resolved by keeping the last one
 (merge-tailwind-classes '("px-2" "px-3"))
-;; => (\"px-3\")
+;; => ("px-3")
 
 (merge-tailwind-classes '("py-2" "px-3"))
-;; => (\"py-2\" \"px-3\")  ; Non-conflicting classes are both kept
+;; => ("py-2" "px-3")  ; Non-conflicting classes are both kept
 
 (merge-tailwind-classes '("bg-red-500" "bg-blue-500"))
-;; => (\"bg-blue-500\")
+;; => ("bg-blue-500")
 
 ;; Conflict resolution - the last class wins
 (merge-tailwind-classes '("h-10" "h-min"))
-;; => (\"h-min\")
+;; => ("h-min")
 
 (merge-tailwind-classes '("mix-blend-normal" "mix-blend-multiply"))
-;; => (\"mix-blend-multiply\")
+;; => ("mix-blend-multiply")
 
 ;; Non-conflicting classes are preserved
 (merge-tailwind-classes '("stroke-black" "stroke-1"))
-;; => (\"stroke-black\" \"stroke-1\")
+;; => ("stroke-black" "stroke-1")
 
 (merge-tailwind-classes '("outline-black" "outline-1"))
-;; => (\"outline-black\" \"outline-1\")
+;; => ("outline-black" "outline-1")
 
 ;; Arbitrary values support
 (merge-tailwind-classes '("stroke-2" "stroke-[3]"))
-;; => (\"stroke-[3]\")
+;; => ("stroke-[3]")
 
 (merge-tailwind-classes '("grayscale-0" "grayscale-[50%]"))
-;; => (\"grayscale-[50%]\")
+;; => ("grayscale-[50%]")
 
 (merge-tailwind-classes '("grow" "grow-[2]"))
-;; => (\"grow-[2]\")
+;; => ("grow-[2]")
 ```
 """)
 
