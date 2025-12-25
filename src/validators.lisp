@@ -4,13 +4,8 @@
                 #:->)
   (:import-from #:parse-number
                 #:parse-number)
-  (:export #:integer-value-p
-           #:number-value-p
-           #:fraction-value-p
-           #:tshirt-size-p
-           #:percent-value-p
-           #:empty-or-number-p))
-
+  (:import-from #:alexandria
+                #:curry))
 (in-package #:tailwind-merge/validators)
 
 
@@ -89,3 +84,24 @@
   (or (null value)
       (string= value "")
       (number-value-p value)))
+
+
+(-> make-validators-from-rule (list)
+    (values list &optional))
+
+(defun make-validators-from-rule (rule)
+  (cond
+    ((every #'keywordp rule)
+     (list (lambda (value)
+             (member value rule
+                     :test #'string-equal))))
+    (t
+     (loop for item in rule
+           collect (etypecase item
+                     (keyword (curry #'string-equal item))
+                     (function item)
+                     (symbol
+                        (unless (fboundp item)
+                          (error "Symbol ~S should be bound to a function"
+                                 item))
+                        item))))))

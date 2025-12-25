@@ -8,7 +8,7 @@
   :bug-tracker "https://github.com/40ants/tailwind-merge/issues"
   :pathname "t"
   :depends-on ("hamcrest"
-               "tailwind-merge-tests/core"
+               "tailwind-merge-tests/merger"
                "tailwind-merge-tests/arbitrary")
   :perform (test-op (op c)
                     (unless (symbol-call :rove :run c)

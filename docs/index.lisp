@@ -81,7 +81,7 @@ You can install this library from Quicklisp, but you want to receive updates qui
 
 (defsection @usage (:title "Usage")
   """
-The TAILWIND-MERGE/TAILWIND-CLASSES:MERGE-TAILWIND-CLASSES function allows you to merge Tailwind CSS classes while resolving conflicts between them. It keeps the last class in case of conflicts.
+The TAILWIND-MERGE:MERGE-TAILWIND-CLASSES function allows you to merge Tailwind CSS classes while resolving conflicts between them. It keeps the last class in case of conflicts.
 
 ```lisp
 ;; Basic class merging - conflicting classes are resolved by keeping the last one

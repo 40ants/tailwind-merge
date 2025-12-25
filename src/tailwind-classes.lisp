@@ -4,21 +4,19 @@
                 #:soft-list-of
                 #:->
                 #:dict)
-  (:import-from #:alexandria
-                #:curry)
   (:import-from #:tailwind-merge/validators
                 #:integer-value-p
                 #:number-value-p
                 #:fraction-value-p
                 #:tshirt-size-p
                 #:percent-value-p
-                #:empty-or-number-p)
+                #:empty-or-number-p
+                #:make-validators-from-rule)
   (:import-from #:tailwind-merge/arbitrary
                 #:arbitrary-value-p
                 #:arbitrary-variable-p
                 #:arbitrary-number-p
-                #:arbitrary-length-p)
-  (:export #:merge-tailwind-classes))
+                #:arbitrary-length-p))
 (in-package #:tailwind-merge/tailwind-classes)
 
 
@@ -1064,26 +1062,6 @@
     (:touch-pz :touch)))
 
 
-(-> make-validators-from-rule (list)
-    (values list &optional))
-
-(defun make-validators-from-rule (rule)
-  (cond
-    ((every #'keywordp rule)
-     (list (lambda (value)
-             (member value rule
-                     :test #'string-equal))))
-    (t
-     (loop for item in rule
-           collect (etypecase item
-                     (keyword (curry #'string-equal item))
-                     (function item)
-                     (symbol
-                        (unless (fboundp item)
-                          (error "Symbol ~S should be bound to a function"
-                                 item))
-                        item))))))
-
 
 (defun build-classes-map ()
   (loop with result = (serapeum:dict)
@@ -1140,49 +1118,4 @@
 
 
 
-(-> merge-tailwind-classes ((soft-list-of string))
-    (values (soft-list-of string) &optional))
 
-(defun merge-tailwind-classes (classes)
-  "Merges Tailwind CSS classes while resolving conflicts between them.
-    
-   This function takes a list of CSS class strings and returns a new list with
-   conflicting classes resolved. When multiple classes from the same group are
-   present, only the last one (in order) is kept, effectively overriding the
-   previous ones.
-
-   For example, if both 'px-2' and 'px-3' are in the input, only 'px-3' will
-   appear in the output since both belong to the same padding-x group.
-
-   Non-conflicting classes are preserved in the output.
-
-   Args:
-
-   - CLASSES: A list of strings representing Tailwind CSS classes.
-
-   Returns:
-
-   A list of strings with conflicting classes resolved, keeping only the last
-   class in case of conflicts.
-
-   Examples:
-
-   ```lisp
-   (merge-tailwind-classes '(\"px-2\" \"px-3\"))
-   ;; => (\"px-3\")
-
-   (merge-tailwind-classes '(\"py-2\" \"px-3\"))
-   ;; => (\"py-2\" \"px-3\")
-
-   (merge-tailwind-classes '(\"bg-red-500\" \"bg-blue-500\"))
-   ;; => (\"bg-blue-500\")
-   ```
-   "
-  (loop with seen-classes = (dict)
-        for class in (reverse classes)
-        for parsed = (parse-class class)
-        unless (gethash parsed seen-classes)
-          collect class into results
-          and do (setf (gethash parsed seen-classes)
-                       t)
-        finally (return (nreverse results))))

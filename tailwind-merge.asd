@@ -9,5 +9,5 @@
   :class :40ants-asdf-system
   :defsystem-depends-on ("40ants-asdf-system")
   :pathname "src"
-  :depends-on ("tailwind-merge/tailwind-classes")
+  :depends-on ("tailwind-merge/merger")
   :in-order-to ((test-op (test-op "tailwind-merge-tests"))))

@@ -1,6 +1,6 @@
-(uiop:define-package #:tailwind-merge-tests/core
+(uiop:define-package #:tailwind-merge-tests/merger
   (:use #:cl)
-  (:import-from #:tailwind-merge/tailwind-classes
+  (:import-from #:tailwind-merge/merger
                 #:merge-tailwind-classes)
   (:import-from #:rove
                 #:deftest
@@ -10,7 +10,7 @@
                 #:contains)
   (:import-from #:hamcrest/rove
                 #:assert-that))
-(in-package #:tailwind-merge-tests/core)
+(in-package #:tailwind-merge-tests/merger)
 
 
 (deftest test-merge-tailwind-classes-basic

@@ -1,28 +1,5 @@
 (uiop:define-package #:tailwind-merge/arbitrary
-  (:use #:cl)
-  (:export
-   ;; Basic checks
-   #:arbitrary-value-p
-   #:arbitrary-variable-p
-   ;; Typed arbitrary values
-   #:arbitrary-length-p
-   #:arbitrary-number-p
-   #:arbitrary-position-p
-   #:arbitrary-image-p
-   #:arbitrary-shadow-p
-   #:arbitrary-size-p
-   ;; Typed arbitrary variables
-   #:arbitrary-variable-length-p
-   #:arbitrary-variable-position-p
-   #:arbitrary-variable-image-p
-   #:arbitrary-variable-shadow-p
-   #:arbitrary-variable-size-p
-   #:arbitrary-variable-family-name-p
-   ;; Utility
-   #:any-non-arbitrary-p
-   ;; Parsing helpers
-   #:parse-arbitrary-value
-   #:parse-arbitrary-variable))
+  (:use #:cl))
 (in-package #:tailwind-merge/arbitrary)
 
 ;;; ============================================================================
