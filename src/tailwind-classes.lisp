@@ -5,6 +5,7 @@
                 #:->
                 #:dict)
   (:import-from #:tailwind-merge/validators
+                #:colorp
                 #:integer-value-p
                 #:number-value-p
                 #:fraction-value-p
@@ -41,14 +42,14 @@
 
     ;; Aspect Ratio
     (:aspect (:aspect :auto :square :video)
-             (:aspect fraction-value-p))
+     (:aspect fraction-value-p))
 
     ;; Container (deprecated in v4)
     (:container :container)
 
     ;; Columns
     (:columns (:columns number-value-p)
-              (:columns tshirt-size-p))
+     (:columns tshirt-size-p))
 
     ;; Break After
     (:break-after (:break-after :auto :avoid :all :avoid-page :page :left :right :column))
@@ -66,11 +67,11 @@
     (:box (:box :border :content))
 
     ;; Display
-    (:display :block :inline-block :inline :flex :inline-flex
-              :table :inline-table :table-caption :table-cell
-              :table-column :table-column-group :table-footer-group
-              :table-header-group :table-row-group :table-row
-              :flow-root :grid :inline-grid :contents :list-item :hidden)
+    (:display (:block :inline-block :inline :flex :inline-flex
+                      :table :inline-table :table-caption :table-cell
+                      :table-column :table-column-group :table-footer-group
+                      :table-header-group :table-row-group :table-row
+                      :flow-root :grid :inline-grid :contents :list-item :hidden))
 
     ;; Screen Reader
     (:sr :sr-only :not-sr-only)
@@ -89,8 +90,8 @@
 
     ;; Object Position
     (:object-position (:object :center :top :bottom :left :right
-                               :top-left :left-top :top-right :right-top
-                               :bottom-right :right-bottom :bottom-left :left-bottom))
+                       :top-left :left-top :top-right :right-top
+                       :bottom-right :right-bottom :bottom-left :left-bottom))
 
     ;; Overflow
     (:overflow (:overflow :auto :hidden :clip :visible :scroll))
@@ -107,39 +108,39 @@
 
     ;; Top/Right/Bottom/Left (Inset)
     (:inset (:inset :auto :full)
-            (:inset number-value-p)
-            (:inset fraction-value-p))
+     (:inset number-value-p)
+     (:inset fraction-value-p))
     (:inset-x (:inset-x :auto :full)
-              (:inset-x number-value-p)
-              (:inset-x fraction-value-p))
+     (:inset-x number-value-p)
+     (:inset-x fraction-value-p))
     (:inset-y (:inset-y :auto :full)
-              (:inset-y number-value-p)
-              (:inset-y fraction-value-p))
+     (:inset-y number-value-p)
+     (:inset-y fraction-value-p))
     (:start (:start :auto :full)
-            (:start number-value-p)
-            (:start fraction-value-p))
+     (:start number-value-p)
+     (:start fraction-value-p))
     (:end (:end :auto :full)
-          (:end number-value-p)
-          (:end fraction-value-p))
+     (:end number-value-p)
+     (:end fraction-value-p))
     (:top (:top :auto :full)
-          (:top number-value-p)
-          (:top fraction-value-p))
+     (:top number-value-p)
+     (:top fraction-value-p))
     (:right (:right :auto :full)
-            (:right number-value-p)
-            (:right fraction-value-p))
+     (:right number-value-p)
+     (:right fraction-value-p))
     (:bottom (:bottom :auto :full)
-             (:bottom number-value-p)
-             (:bottom fraction-value-p))
+     (:bottom number-value-p)
+     (:bottom fraction-value-p))
     (:left (:left :auto :full)
-           (:left number-value-p)
-           (:left fraction-value-p))
+     (:left number-value-p)
+     (:left fraction-value-p))
 
     ;; Visibility
     (:visibility :visible :invisible :collapse)
 
     ;; Z-Index
     (:z (:z :auto)
-        (:z integer-value-p))
+     (:z integer-value-p))
 
     ;; ========================
     ;; --- Flexbox and Grid ---
@@ -147,9 +148,9 @@
 
     ;; Flex Basis
     (:basis (:basis :auto :full)
-            (:basis number-value-p)
-            (:basis fraction-value-p)
-            (:basis tshirt-size-p))
+     (:basis number-value-p)
+     (:basis fraction-value-p)
+     (:basis tshirt-size-p))
 
     ;; Flex Direction
     (:flex-direction (:flex :row :row-reverse :col :col-reverse))
@@ -159,50 +160,50 @@
 
     ;; Flex
     (:flex (:flex :auto :initial :none)
-           (:flex number-value-p)
-           (:flex fraction-value-p))
+     (:flex number-value-p)
+     (:flex fraction-value-p))
 
     ;; Flex Grow
     (:grow (:grow null)
-           (:grow number-value-p)
-           (:grow arbitrary-value-p)
-           (:grow arbitrary-variable-p))
+     (:grow number-value-p)
+     (:grow arbitrary-value-p)
+     (:grow arbitrary-variable-p))
 
     ;; Flex Shrink
     (:shrink (:shrink null)
-             (:shrink number-value-p))
+     (:shrink number-value-p))
 
     ;; Order
     (:order (:order :first :last :none)
-            (:order integer-value-p))
+     (:order integer-value-p))
 
     ;; Grid Template Columns
     (:grid-cols (:grid-cols :none :subgrid)
-                (:grid-cols integer-value-p))
+     (:grid-cols integer-value-p))
 
     ;; Grid Column Start/End
     (:col-start-end (:col :auto :full)
-                    (:col integer-value-p)
-                    (:col-span :full)
-                    (:col-span integer-value-p))
+     (:col integer-value-p)
+     (:col-span :full)
+     (:col-span integer-value-p))
     (:col-start (:col-start :auto)
-                (:col-start integer-value-p))
+     (:col-start integer-value-p))
     (:col-end (:col-end :auto)
-              (:col-end integer-value-p))
+     (:col-end integer-value-p))
 
     ;; Grid Template Rows
     (:grid-rows (:grid-rows :none :subgrid)
-                (:grid-rows integer-value-p))
+     (:grid-rows integer-value-p))
 
     ;; Grid Row Start/End
     (:row-start-end (:row :auto :full)
-                    (:row integer-value-p)
-                    (:row-span :full)
-                    (:row-span integer-value-p))
+     (:row integer-value-p)
+     (:row-span :full)
+     (:row-span integer-value-p))
     (:row-start (:row-start :auto)
-                (:row-start integer-value-p))
+     (:row-start integer-value-p))
     (:row-end (:row-end :auto)
-              (:row-end integer-value-p))
+     (:row-end integer-value-p))
 
     ;; Grid Auto Flow
     (:grid-flow (:grid-flow :row :col :dense :row-dense :col-dense))
@@ -218,7 +219,7 @@
 
     ;; Justify Content
     (:justify-content (:justify :start :end :center :between :around :evenly :stretch :baseline :normal
-                                :center-safe :end-safe))
+                       :center-safe :end-safe))
 
     ;; Justify Items
     (:justify-items (:justify-items :start :end :center :stretch :normal :center-safe :end-safe))
@@ -228,17 +229,17 @@
 
     ;; Align Content
     (:align-content (:content :normal :start :end :center :between :around :evenly :stretch :baseline
-                              :center-safe :end-safe))
+                     :center-safe :end-safe))
 
     ;; Align Items
     (:align-items (:items :start :end :center :stretch :baseline :center-safe :end-safe)
-                  (:items-baseline null)
-                  (:items-baseline :last))
+     (:items-baseline null)
+     (:items-baseline :last))
 
     ;; Align Self
     (:align-self (:self :auto :start :end :center :stretch :baseline :center-safe :end-safe)
-                 (:self-baseline null)
-                 (:self-baseline :last))
+     (:self-baseline null)
+     (:self-baseline :last))
 
     ;; Place Content
     (:place-content (:place-content :start :end :center :between :around :evenly :stretch :baseline
@@ -267,23 +268,23 @@
 
     ;; Margin
     (:m (:m :auto)
-        (:m number-value-p))
+     (:m number-value-p))
     (:mx (:mx :auto)
-         (:mx number-value-p))
+      (:mx number-value-p))
     (:my (:my :auto)
-         (:my number-value-p))
+     (:my number-value-p))
     (:ms (:ms :auto)
-         (:ms number-value-p))
+     (:ms number-value-p))
     (:me (:me :auto)
-         (:me number-value-p))
+     (:me number-value-p))
     (:mt (:mt :auto)
-         (:mt number-value-p))
+     (:mt number-value-p))
     (:mr (:mr :auto)
-         (:mr number-value-p))
+     (:mr number-value-p))
     (:mb (:mb :auto)
-         (:mb number-value-p))
+     (:mb number-value-p))
     (:ml (:ml :auto)
-         (:ml number-value-p))
+     (:ml number-value-p))
 
     ;; Space Between
     (:space-x (:space-x number-value-p))
@@ -297,41 +298,41 @@
 
     ;; Size (width & height)
     (:size (:size :auto :full :min :max :fit :dvw :dvh :lvw :lvh :svw :svh)
-           (:size number-value-p)
-           (:size fraction-value-p))
+     (:size number-value-p)
+     (:size fraction-value-p))
 
     ;; Width
     (:w (:w :auto :full :screen :min :max :fit :dvw :dvh :lvw :lvh :svw :svh)
-        (:w number-value-p)
-        (:w fraction-value-p)
-        (:w tshirt-size-p))
+     (:w number-value-p)
+     (:w fraction-value-p)
+     (:w tshirt-size-p))
 
     ;; Min-Width
     (:min-w (:min-w :auto :full :screen :none :min :max :fit)
-            (:min-w number-value-p)
-            (:min-w fraction-value-p)
-            (:min-w tshirt-size-p))
+     (:min-w number-value-p)
+     (:min-w fraction-value-p)
+     (:min-w tshirt-size-p))
 
     ;; Max-Width
     (:max-w (:max-w :auto :full :screen :none :prose :min :max :fit)
-            (:max-w number-value-p)
-            (:max-w fraction-value-p)
-            (:max-w tshirt-size-p))
+     (:max-w number-value-p)
+     (:max-w fraction-value-p)
+     (:max-w tshirt-size-p))
 
     ;; Height
     (:h (:h :auto :full :screen :lh :min :max :fit :dvh :dvw :lvh :lvw :svh :svw)
-        (:h number-value-p)
-        (:h fraction-value-p))
+     (:h number-value-p)
+     (:h fraction-value-p))
 
     ;; Min-Height
     (:min-h (:min-h :auto :full :screen :lh :none :min :max :fit)
-            (:min-h number-value-p)
-            (:min-h fraction-value-p))
+     (:min-h number-value-p)
+     (:min-h fraction-value-p))
 
     ;; Max-Height
     (:max-h (:max-h :auto :full :screen :lh :min :max :fit)
-            (:max-h number-value-p)
-            (:max-h fraction-value-p))
+     (:max-h number-value-p)
+     (:max-h fraction-value-p))
 
     ;; ==================
     ;; --- Typography ---
@@ -339,7 +340,7 @@
 
     ;; Font Size
     (:font-size (:text :base)
-                (:text tshirt-size-p))
+     (:text tshirt-size-p))
 
     ;; Font Smoothing
     (:font-smoothing :antialiased :subpixel-antialiased)
@@ -349,12 +350,12 @@
 
     ;; Font Weight
     (:font-weight (:font :thin :extralight :light :normal :medium :semibold :bold :extrabold :black)
-                  (:font number-value-p))
+     (:font number-value-p))
 
     ;; Font Stretch
     (:font-stretch (:font-stretch :ultra-condensed :extra-condensed :condensed :semi-condensed
                                   :normal :semi-expanded :expanded :extra-expanded :ultra-expanded)
-                   (:font-stretch percent-value-p))
+     (:font-stretch percent-value-p))
 
     ;; Font Family
     (:font-family (:font :sans :serif :mono))
@@ -372,11 +373,11 @@
 
     ;; Line Clamp
     (:line-clamp (:line-clamp :none)
-                 (:line-clamp number-value-p))
+     (:line-clamp number-value-p))
 
     ;; Line Height (Leading)
     (:leading (:leading :none :tight :snug :normal :relaxed :loose)
-              (:leading number-value-p))
+     (:leading number-value-p))
 
     ;; List Style Image
     (:list-image (:list-image :none))
@@ -394,7 +395,8 @@
     (:placeholder-color (:placeholder)) ;; Would need color validator
 
     ;; Text Color
-    (:text-color) ;; Would need color validator - placeholder for now
+    ;; TODO: support arbitrary color values here
+    (:text-color (:text colorp))
 
     ;; Text Decoration
     (:text-decoration :underline :overline :line-through :no-underline)
@@ -404,14 +406,14 @@
 
     ;; Text Decoration Thickness
     (:text-decoration-thickness (:decoration :from-font :auto)
-                                (:decoration number-value-p))
+     (:decoration number-value-p))
 
     ;; Text Decoration Color
     (:text-decoration-color) ;; Would need color validator
 
     ;; Text Underline Offset
     (:underline-offset (:underline-offset :auto)
-                       (:underline-offset number-value-p))
+     (:underline-offset number-value-p))
 
     ;; Text Transform
     (:text-transform :uppercase :lowercase :capitalize :normal-case)
@@ -447,6 +449,9 @@
     ;; --- Backgrounds ---
     ;; ===================
 
+    ;; TODO: support arbitrary color values here
+    (:bg-color (:bg colorp))
+    
     ;; Background Attachment
     (:bg-attachment (:bg :fixed :local :scroll))
 
@@ -458,22 +463,22 @@
 
     ;; Background Position
     (:bg-position (:bg :center :top :bottom :left :right
-                       :top-left :left-top :top-right :right-top
-                       :bottom-right :right-bottom :bottom-left :left-bottom))
+                   :top-left :left-top :top-right :right-top
+                   :bottom-right :right-bottom :bottom-left :left-bottom))
 
     ;; Background Repeat
     (:bg-repeat (:bg :no-repeat)
-                (:bg-repeat null)
-                (:bg-repeat :x :y :space :round))
+     (:bg-repeat null)
+     (:bg-repeat :x :y :space :round))
 
     ;; Background Size
     (:bg-size (:bg :auto :cover :contain))
 
     ;; Background Image
     (:bg-image (:bg :none)
-               (:bg-linear-to :t :tr :r :br :b :bl :l :tl)
-               (:bg-radial null)
-               (:bg-conic))
+     (:bg-linear-to :t :tr :r :br :b :bl :l :tl)
+     (:bg-radial null)
+     (:bg-conic))
 
     ;; Background Color
     (:bg-color) ;; Would need color validator
@@ -483,86 +488,89 @@
     (:gradient-via-pos (:via percent-value-p))
     (:gradient-to-pos (:to percent-value-p))
     (:gradient-from) ;; Would need color validator
-    (:gradient-via) ;; Would need color validator
-    (:gradient-to) ;; Would need color validator
+    (:gradient-via)  ;; Would need color validator
+    (:gradient-to)   ;; Would need color validator
 
     ;; ===============
     ;; --- Borders ---
     ;; ===============
 
+    ;; TODO: support arbitrary color values here
+    (:border-color (:border colorp))
+    
     ;; Border Radius
     (:rounded (:rounded null)
-              (:rounded :none :full)
-              (:rounded tshirt-size-p))
+     (:rounded :none :full)
+     (:rounded tshirt-size-p))
     (:rounded-s (:rounded-s null)
-                (:rounded-s :none :full)
-                (:rounded-s tshirt-size-p))
+     (:rounded-s :none :full)
+     (:rounded-s tshirt-size-p))
     (:rounded-e (:rounded-e null)
-                (:rounded-e :none :full)
-                (:rounded-e tshirt-size-p))
+     (:rounded-e :none :full)
+     (:rounded-e tshirt-size-p))
     (:rounded-t (:rounded-t null)
-                (:rounded-t :none :full)
-                (:rounded-t tshirt-size-p))
+     (:rounded-t :none :full)
+     (:rounded-t tshirt-size-p))
     (:rounded-r (:rounded-r null)
-                (:rounded-r :none :full)
-                (:rounded-r tshirt-size-p))
+     (:rounded-r :none :full)
+     (:rounded-r tshirt-size-p))
     (:rounded-b (:rounded-b null)
-                (:rounded-b :none :full)
-                (:rounded-b tshirt-size-p))
+     (:rounded-b :none :full)
+     (:rounded-b tshirt-size-p))
     (:rounded-l (:rounded-l null)
-                (:rounded-l :none :full)
-                (:rounded-l tshirt-size-p))
+     (:rounded-l :none :full)
+     (:rounded-l tshirt-size-p))
     (:rounded-ss (:rounded-ss null)
-                 (:rounded-ss :none :full)
-                 (:rounded-ss tshirt-size-p))
+     (:rounded-ss :none :full)
+     (:rounded-ss tshirt-size-p))
     (:rounded-se (:rounded-se null)
-                 (:rounded-se :none :full)
-                 (:rounded-se tshirt-size-p))
+     (:rounded-se :none :full)
+     (:rounded-se tshirt-size-p))
     (:rounded-ee (:rounded-ee null)
-                 (:rounded-ee :none :full)
-                 (:rounded-ee tshirt-size-p))
+     (:rounded-ee :none :full)
+     (:rounded-ee tshirt-size-p))
     (:rounded-es (:rounded-es null)
-                 (:rounded-es :none :full)
-                 (:rounded-es tshirt-size-p))
+     (:rounded-es :none :full)
+     (:rounded-es tshirt-size-p))
     (:rounded-tl (:rounded-tl null)
-                 (:rounded-tl :none :full)
-                 (:rounded-tl tshirt-size-p))
+     (:rounded-tl :none :full)
+     (:rounded-tl tshirt-size-p))
     (:rounded-tr (:rounded-tr null)
-                 (:rounded-tr :none :full)
-                 (:rounded-tr tshirt-size-p))
+     (:rounded-tr :none :full)
+     (:rounded-tr tshirt-size-p))
     (:rounded-br (:rounded-br null)
-                 (:rounded-br :none :full)
-                 (:rounded-br tshirt-size-p))
+     (:rounded-br :none :full)
+     (:rounded-br tshirt-size-p))
     (:rounded-bl (:rounded-bl null)
-                 (:rounded-bl :none :full)
-                 (:rounded-bl tshirt-size-p))
+     (:rounded-bl :none :full)
+     (:rounded-bl tshirt-size-p))
 
     ;; Border Width
     (:border-w (:border null)
-               (:border number-value-p))
+     (:border number-value-p))
     (:border-w-x (:border-x null)
-                 (:border-x number-value-p))
+     (:border-x number-value-p))
     (:border-w-y (:border-y null)
-                 (:border-y number-value-p))
+     (:border-y number-value-p))
     (:border-w-s (:border-s null)
-                 (:border-s number-value-p))
+     (:border-s number-value-p))
     (:border-w-e (:border-e null)
-                 (:border-e number-value-p))
+     (:border-e number-value-p))
     (:border-w-t (:border-t null)
-                 (:border-t number-value-p))
+     (:border-t number-value-p))
     (:border-w-r (:border-r null)
-                 (:border-r number-value-p))
+     (:border-r number-value-p))
     (:border-w-b (:border-b null)
-                 (:border-b number-value-p))
+     (:border-b number-value-p))
     (:border-w-l (:border-l null)
-                 (:border-l number-value-p))
+     (:border-l number-value-p))
 
     ;; Divide Width
     (:divide-x (:divide-x null)
-               (:divide-x number-value-p))
+     (:divide-x number-value-p))
     (:divide-x-reverse :divide-x-reverse)
     (:divide-y (:divide-y null)
-               (:divide-y number-value-p))
+     (:divide-y number-value-p))
     (:divide-y-reverse :divide-y-reverse)
 
     ;; Border Style
@@ -572,7 +580,7 @@
     (:divide-style (:divide :solid :dashed :dotted :double :hidden :none))
 
     ;; Border Color
-    (:border-color) ;; Would need color validator
+    (:border-color)   ;; Would need color validator
     (:border-color-x) ;; Would need color validator
     (:border-color-y) ;; Would need color validator
     (:border-color-s) ;; Would need color validator
@@ -593,7 +601,7 @@
 
     ;; Outline Width
     (:outline-w (:outline null)
-                (:outline number-value-p))
+     (:outline number-value-p))
 
     ;; Outline Color
     (:outline-color) ;; Would need color validator
@@ -604,22 +612,22 @@
 
     ;; Box Shadow
     (:shadow (:shadow null)
-             (:shadow :none)
-             (:shadow tshirt-size-p))
+     (:shadow :none)
+     (:shadow tshirt-size-p))
 
     ;; Box Shadow Color
     (:shadow-color) ;; Would need color validator
 
     ;; Inset Box Shadow
     (:inset-shadow (:inset-shadow :none)
-                   (:inset-shadow tshirt-size-p))
+     (:inset-shadow tshirt-size-p))
 
     ;; Inset Box Shadow Color
     (:inset-shadow-color) ;; Would need color validator
 
     ;; Ring Width
     (:ring-w (:ring null)
-             (:ring number-value-p))
+     (:ring number-value-p))
     (:ring-w-inset :ring-inset)
 
     ;; Ring Color
@@ -633,14 +641,14 @@
 
     ;; Inset Ring Width
     (:inset-ring-w (:inset-ring null)
-                   (:inset-ring number-value-p))
+     (:inset-ring number-value-p))
 
     ;; Inset Ring Color
     (:inset-ring-color) ;; Would need color validator
 
     ;; Text Shadow
     (:text-shadow (:text-shadow :none)
-                  (:text-shadow tshirt-size-p))
+     (:text-shadow tshirt-size-p))
 
     ;; Text Shadow Color
     (:text-shadow-color) ;; Would need color validator
@@ -665,12 +673,12 @@
 
     ;; Filter
     (:filter (:filter null)
-             (:filter :none))
+      (:filter :none))
 
     ;; Blur
     (:blur (:blur null)
-           (:blur :none)
-           (:blur tshirt-size-p))
+     (:blur :none)
+     (:blur tshirt-size-p))
 
     ;; Brightness
     (:brightness (:brightness number-value-p))
@@ -680,40 +688,40 @@
 
     ;; Drop Shadow
     (:drop-shadow (:drop-shadow null)
-                  (:drop-shadow :none)
-                  (:drop-shadow tshirt-size-p))
+     (:drop-shadow :none)
+     (:drop-shadow tshirt-size-p))
 
     ;; Drop Shadow Color
     (:drop-shadow-color) ;; Would need color validator
 
     ;; Grayscale
     (:grayscale (:grayscale null)
-                (:grayscale number-value-p)
-                (:grayscale arbitrary-value-p)
-                (:grayscale arbitrary-variable-p))
+     (:grayscale number-value-p)
+     (:grayscale arbitrary-value-p)
+     (:grayscale arbitrary-variable-p))
 
     ;; Hue Rotate
     (:hue-rotate (:hue-rotate number-value-p))
 
     ;; Invert
     (:invert (:invert null)
-             (:invert number-value-p))
+     (:invert number-value-p))
 
     ;; Saturate
     (:saturate (:saturate number-value-p))
 
     ;; Sepia
     (:sepia (:sepia null)
-            (:sepia number-value-p))
+     (:sepia number-value-p))
 
     ;; Backdrop Filter
     (:backdrop-filter (:backdrop-filter null)
-                      (:backdrop-filter :none))
+     (:backdrop-filter :none))
 
     ;; Backdrop Blur
     (:backdrop-blur (:backdrop-blur null)
-                    (:backdrop-blur :none)
-                    (:backdrop-blur tshirt-size-p))
+     (:backdrop-blur :none)
+     (:backdrop-blur tshirt-size-p))
 
     ;; Backdrop Brightness
     (:backdrop-brightness (:backdrop-brightness number-value-p))
@@ -723,14 +731,14 @@
 
     ;; Backdrop Grayscale
     (:backdrop-grayscale (:backdrop-grayscale null)
-                         (:backdrop-grayscale number-value-p))
+     (:backdrop-grayscale number-value-p))
 
     ;; Backdrop Hue Rotate
     (:backdrop-hue-rotate (:backdrop-hue-rotate number-value-p))
 
     ;; Backdrop Invert
     (:backdrop-invert (:backdrop-invert null)
-                      (:backdrop-invert number-value-p))
+     (:backdrop-invert number-value-p))
 
     ;; Backdrop Opacity
     (:backdrop-opacity (:backdrop-opacity number-value-p))
@@ -740,7 +748,7 @@
 
     ;; Backdrop Sepia
     (:backdrop-sepia (:backdrop-sepia null)
-                     (:backdrop-sepia number-value-p))
+     (:backdrop-sepia number-value-p))
 
     ;; ==============
     ;; --- Tables ---
@@ -766,14 +774,14 @@
 
     ;; Transition Property
     (:transition (:transition null)
-                 (:transition :all :colors :opacity :shadow :transform :none))
+     (:transition :all :colors :opacity :shadow :transform :none))
 
     ;; Transition Behavior
     (:transition-behavior (:transition :normal :discrete))
 
     ;; Transition Duration
     (:duration (:duration :initial)
-               (:duration number-value-p))
+     (:duration number-value-p))
 
     ;; Transition Timing Function
     (:ease (:ease :linear :initial :in :out :in-out))
@@ -796,28 +804,28 @@
 
     ;; Perspective Origin
     (:perspective-origin (:perspective-origin :center :top :bottom :left :right
-                                              :top-left :left-top :top-right :right-top
-                                              :bottom-right :right-bottom :bottom-left :left-bottom))
+                          :top-left :left-top :top-right :right-top
+                          :bottom-right :right-bottom :bottom-left :left-bottom))
 
     ;; Rotate
     (:rotate (:rotate :none)
-             (:rotate number-value-p))
+     (:rotate number-value-p))
     (:rotate-x (:rotate-x :none)
-               (:rotate-x number-value-p))
+     (:rotate-x number-value-p))
     (:rotate-y (:rotate-y :none)
-               (:rotate-y number-value-p))
+     (:rotate-y number-value-p))
     (:rotate-z (:rotate-z :none)
-               (:rotate-z number-value-p))
+     (:rotate-z number-value-p))
 
     ;; Scale
     (:scale (:scale :none)
-            (:scale number-value-p))
+     (:scale number-value-p))
     (:scale-x (:scale-x :none)
-              (:scale-x number-value-p))
+     (:scale-x number-value-p))
     (:scale-y (:scale-y :none)
-              (:scale-y number-value-p))
+     (:scale-y number-value-p))
     (:scale-z (:scale-z :none)
-              (:scale-z number-value-p))
+     (:scale-z number-value-p))
     (:scale-3d :scale-3d)
 
     ;; Skew
@@ -827,29 +835,29 @@
 
     ;; Transform
     (:transform (:transform null)
-                (:transform :none :gpu :cpu))
+     (:transform :none :gpu :cpu))
 
     ;; Transform Origin
     (:transform-origin (:origin :center :top :bottom :left :right
-                                :top-left :left-top :top-right :right-top
-                                :bottom-right :right-bottom :bottom-left :left-bottom))
+                        :top-left :left-top :top-right :right-top
+                        :bottom-right :right-bottom :bottom-left :left-bottom))
 
     ;; Transform Style
     (:transform-style (:transform :3d :flat))
 
     ;; Translate
     (:translate (:translate :full)
-                (:translate number-value-p)
-                (:translate fraction-value-p))
+     (:translate number-value-p)
+     (:translate fraction-value-p))
     (:translate-x (:translate-x :full)
-                  (:translate-x number-value-p)
-                  (:translate-x fraction-value-p))
+     (:translate-x number-value-p)
+     (:translate-x fraction-value-p))
     (:translate-y (:translate-y :full)
-                  (:translate-y number-value-p)
-                  (:translate-y fraction-value-p))
+     (:translate-y number-value-p)
+     (:translate-y fraction-value-p))
     (:translate-z (:translate-z :full)
-                  (:translate-z number-value-p)
-                  (:translate-z fraction-value-p))
+     (:translate-z number-value-p)
+     (:translate-z fraction-value-p))
     (:translate-none :translate-none)
 
     ;; =====================
@@ -870,7 +878,7 @@
 
     ;; Cursor
     (:cursor (:cursor :auto :default :pointer :wait :text :move :help :not-allowed :none
-                      :context-menu :progress :cell :crosshair :vertical-text :alias :copy
+              :context-menu :progress :cell :crosshair :vertical-text :alias :copy
                       :no-drop :grab :grabbing :all-scroll :col-resize :row-resize
                       :n-resize :e-resize :s-resize :w-resize :ne-resize :nw-resize
                       :se-resize :sw-resize :ew-resize :ns-resize :nesw-resize :nwse-resize
@@ -884,7 +892,7 @@
 
     ;; Resize
     (:resize (:resize :none :y :x)
-             (:resize null))
+     (:resize null))
 
     ;; Scroll Behavior
     (:scroll-behavior (:scroll :auto :smooth))
@@ -944,9 +952,9 @@
 
     ;; Stroke Width
     (:stroke-w (:stroke number-value-p)
-               (:stroke arbitrary-number-p)
-               (:stroke arbitrary-length-p)
-               (:stroke arbitrary-variable-p))
+     (:stroke arbitrary-number-p)
+     (:stroke arbitrary-length-p)
+     (:stroke arbitrary-variable-p))
 
     ;; Stroke
     (:stroke (:stroke :none)) ;; Would need color validator for other values
@@ -1066,7 +1074,9 @@
 (defun build-classes-map ()
   (loop with result = (serapeum:dict)
         for (class-name . rest) in *classes*
-        for rules = (if rest rest (list class-name))
+        for rules = (if rest
+                        rest
+                        (list class-name))
         do (loop for rule in rules
                  do (etypecase rule
                       (keyword

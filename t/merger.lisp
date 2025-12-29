@@ -9,7 +9,9 @@
   (:import-from #:hamcrest/matchers
                 #:contains)
   (:import-from #:hamcrest/rove
-                #:assert-that))
+                #:assert-that)
+  (:import-from #:tailwind-merge/tailwind-classes
+                #:parse-class))
 (in-package #:tailwind-merge-tests/merger)
 
 
@@ -62,3 +64,23 @@
     (assert-that
      (merge-tailwind-classes '("grow" "grow-[2]"))
      (contains "grow-[2]"))))
+
+
+(deftest test-real-classes-merge
+  (assert-that (merge-tailwind-classes '("text-stone-800" "text-red-200"))
+               (contains "text-red-200"))
+  (assert-that (merge-tailwind-classes '("border-slate-600" "border-white"))
+               (contains "border-white"))
+  ;; (assert-that (merge-tailwind-classes '("text-stone-800" "dark:text-stone-300"))
+  ;;              (contains "text-stone-800" "dark:text-stone-300"))
+  ;; (assert-that
+  ;;  (merge-tailwind-classes '("flex" "rounded-xl" "overflow-hidden" "text-stone-800" "dark:text-stone-300" "p-4" "justify-center" "items-center" "border" "border-stone-300" "dark:border-stone-600" "w-full" "min-h-[120px]"))
+  ;;  (contains "flex rounded-xl overflow-hidden text-stone-800 dark:text-stone-300 p-4 justify-center items-center border border-stone-300 dark:border-stone-600 w-full min-h-[120px]"))
+  )
+
+
+(deftest test-parse-class ()
+  (ok (null (parse-class "flex")))
+  
+  (ok (eql (parse-class "flex-col")
+           :flex-direction)))

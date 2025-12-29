@@ -9,7 +9,8 @@
   :pathname "t"
   :depends-on ("hamcrest"
                "tailwind-merge-tests/merger"
-               "tailwind-merge-tests/arbitrary")
+               "tailwind-merge-tests/arbitrary"
+               "tailwind-merge-tests/color-validator")
   :perform (test-op (op c)
                     (unless (symbol-call :rove :run c)
                       (error "Tests failed"))))
