@@ -83,4 +83,11 @@
   (ok (null (parse-class "flex")))
   
   (ok (eql (parse-class "flex-col")
-           :flex-direction)))
+           :flex-direction))
+  
+  (ok (eql (parse-class "text-stone-300")
+           :text-color))
+
+  ;; (ok (eql (parse-class "text-stone-300")
+  ;;          :text-color))
+  )

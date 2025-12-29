@@ -8,7 +8,8 @@
                 #:curry)
   (:import-from #:tailwind-merge/vars
                 #:*color-shades*
-                #:*color-names*)
+                #:*color-names*
+                #:*basic-color-names*)
   (:export #:colorp
            #:integer-value-p
            #:number-value-p
@@ -102,22 +103,26 @@
 
 (defun colorp (value)
   "Matches Tailwind CSS color values like 'slate-600', 'red-500', 'black', 'white', 'transparent', etc."
-  (if value
-      (let* ((value-lower (string-downcase value))
-             (dash-pos (position #\- value-lower)))
-        (if dash-pos
-            ;; Format: color-name-number (e.g., 'slate-600')
-            (let ((color-name (subseq value-lower 0 dash-pos))
-                  (color-value (subseq value-lower (1+ dash-pos))))
-              (if (and (member color-name *color-names* :test #'string=)
-                   (or (member color-value *color-shades* :test #'string=)
-                       ;; Check if it's a valid number between 50 and 950 in increments of 50
-                       (and (every #'digit-char-p color-value)
-                            (let ((num (parse-integer color-value)))
-                              (and (>= num 50) (<= num 950) (= (mod num 50) 0)))))) t nil))
-            ;; Format: basic color name (e.g., 'black', 'white', 'transparent')
-            (if (member value-lower '("black" "white" "transparent" "current" "inherit") :test #'string=) t nil)))
-      nil))
+  (cond
+    ((null value) nil)
+    (t
+     (let* ((value-lower (string-downcase value))
+            (dash-pos (position #\- value-lower)))
+       (cond
+         (dash-pos
+          ;; Format: color-name-number (e.g., 'slate-600')
+          (let ((color-name (subseq value-lower 0 dash-pos))
+                (color-value (subseq value-lower (1+ dash-pos))))
+            (cond
+              ((and (member color-name *color-names*
+                            :test #'string=)
+                    (or (member color-value *color-shades*
+                                :test #'string=)))
+               t)
+              (t nil))))
+         ;; Format: basic color name (e.g., 'black', 'white', 'transparent')
+         (t (when (member value-lower *basic-color-names* :test #'string=)
+              t)))))))
 
 
 (-> make-validators-from-rule (list)
