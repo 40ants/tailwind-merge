@@ -136,24 +136,6 @@
         finally (return (nreverse modifiers))))
 
 
-(defun parse-modifier (class-string)
-  "Parses a class string to extract the modifier prefix if it exists.
-
-   Returns the modifier prefix if found, otherwise returns NIL.
-
-   For classes with multiple modifiers, returns the full modifier chain joined with ':'.
-
-   Examples:
-   (parse-modifier \"hover:bg-red-500\") ; => \"hover\"
-   (parse-modifier \"bg-red-500\")       ; => NIL
-   (parse-modifier \"md:p-4\")          ; => \"md\"
-   (parse-modifier \"group-hover:p-4\")  ; => \"group-hover\"
-   (parse-modifier \"[@supports(display:grid)]:grid\") ; => \"[@supports(display:grid)]\"
-   (parse-modifier \"hover:[@media(min-width:640px)]:p-4\") ; => \"hover:[@media(min-width:640px)]\"
-   "
-  (let ((modifiers (parse-modifiers class-string)))
-    (when modifiers
-      (format nil "~{~a~^:~}" modifiers))))
 
 
 (defparameter *order-sensitive-modifiers*
@@ -198,4 +180,6 @@
                               (sort current-segment #'string<)))
                      (t
                       result))))))
+
+
 

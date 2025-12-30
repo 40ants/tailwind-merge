@@ -18,7 +18,8 @@
                 #:build-classes-map
                 #:parse-class)
   (:import-from #:tailwind-merge/modifiers
-                #:parse-modifier)
+                #:sort-modifiers
+                #:parse-modifiers)
   (:export #:merge-tailwind-classes))
 (in-package #:tailwind-merge/merger)
 
@@ -72,10 +73,9 @@
    "
   (loop with seen-classes = (dict)
         for class in (reverse classes)
-        for modifiers = (tailwind-merge/modifiers::parse-modifiers class)
-        for modifier = (if modifiers
-                           (format nil "~{~a~^:~}" (tailwind-merge/modifiers::sort-modifiers modifiers))
-                           nil)
+        for modifiers = (parse-modifiers class)
+        for modifier = (when modifiers
+                         (format nil "~{~a~^:~}" (sort-modifiers modifiers)))
         for base-class = (if modifiers
                              ;; Extract base class by finding the position after the last colon in the original class
                              (let ((last-colon-pos (position #\: class :from-end t)))

@@ -15,18 +15,19 @@
 
 (deftest test-modifier-parsing ()
   (testing "Modifier parsing"
-    (ok (string= (tailwind-merge/modifiers::parse-modifier "hover:bg-red-500") "hover"))
-    (ok (string= (tailwind-merge/modifiers::parse-modifier "focus:p-4") "focus"))
-    (ok (string= (tailwind-merge/modifiers::parse-modifier "md:p-2") "md"))
-    (ok (string= (tailwind-merge/modifiers::parse-modifier "group-hover:p-4") "group-hover"))
-    (ok (null (tailwind-merge/modifiers::parse-modifier "p-4")))
-    (ok (null (tailwind-merge/modifiers::parse-modifier "bg-red-500")))
+    ;; Test parse-modifiers function (returns list of individual modifiers)
+    (ok (equal (tailwind-merge/modifiers::parse-modifiers "hover:bg-red-500") '("hover")))
+    (ok (equal (tailwind-merge/modifiers::parse-modifiers "focus:p-4") '("focus")))
+    (ok (equal (tailwind-merge/modifiers::parse-modifiers "md:p-2") '("md")))
+    (ok (equal (tailwind-merge/modifiers::parse-modifiers "group-hover:p-4") '("group-hover")))
+    (ok (null (tailwind-merge/modifiers::parse-modifiers "p-4")))
+    (ok (null (tailwind-merge/modifiers::parse-modifiers "bg-red-500")))
     ;; Test complex modifier with nested brackets and parentheses
-    (ok (string= (tailwind-merge/modifiers::parse-modifier "[@supports(display:grid)]:grid") "[@supports(display:grid)]"))
+    (ok (equal (tailwind-merge/modifiers::parse-modifiers "[@supports(display:grid)]:grid") '("[@supports(display:grid)]")))
     ;; Test multiple nested modifiers
-    (ok (string= (tailwind-merge/modifiers::parse-modifier "hover:[@media(min-width:640px)]:p-4") "hover:[@media(min-width:640px)]"))
+    (ok (equal (tailwind-merge/modifiers::parse-modifiers "hover:[@media(min-width:640px)]:p-4") '("hover" "[@media(min-width:640px)]")))
     ;; Test modifier with arbitrary values
-    (ok (string= (tailwind-merge/modifiers::parse-modifier "[hover]:p-4") "[hover]"))))
+    (ok (equal (tailwind-merge/modifiers::parse-modifiers "[hover]:p-4") '("[hover]")))))
 
 
 (deftest test-merge-tailwind-classes-with-modifiers ()
