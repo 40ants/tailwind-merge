@@ -96,8 +96,7 @@
     "peer-target" "peer-open" "peer-closed"
     
     ;; In variants (for styling based on any parent state)
-    "in"
-    ))
+    "in"))
 
 
 (defun parse-modifiers (class-string)
@@ -135,6 +134,7 @@
                 (push modifier modifiers)
                 (setf modifier-start (1+ index)))))
         finally (return (nreverse modifiers))))
+
 
 (defun parse-modifier (class-string)
   "Parses a class string to extract the modifier prefix if it exists.
