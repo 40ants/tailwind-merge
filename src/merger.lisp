@@ -17,6 +17,9 @@
                 #:*classes*
                 #:build-classes-map
                 #:parse-class)
+  (:import-from #:tailwind-merge/modifiers
+                #:parse-modifier
+                #:modifier-conflicts-p)
   (:export #:merge-tailwind-classes))
 (in-package #:tailwind-merge/merger)
 
@@ -26,7 +29,7 @@
 
 (defun merge-tailwind-classes (classes)
   "Merges Tailwind CSS classes while resolving conflicts between them.
-    
+
    This function takes a list of CSS class strings and returns a new list with
    conflicting classes resolved. When multiple classes from the same group are
    present, only the last one (in order) is kept, effectively overriding the
@@ -57,15 +60,37 @@
 
    (merge-tailwind-classes '(\"bg-red-500\" \"bg-blue-500\"))
    ;; => (\"bg-blue-500\")
+
+   (merge-tailwind-classes '(\"p-2\" \"hover:p-4\"))
+   ;; => (\"p-2\" \"hover:p-4\")
+
+   (merge-tailwind-classes '(\"hover:p-2\" \"hover:p-4\"))
+   ;; => (\"hover:p-4\")
+
+   (merge-tailwind-classes '(\"hover:focus:p-2\" \"focus:hover:p-4\"))
+   ;; => (\"focus:hover:p-4\")
    ```
    "
   (loop with seen-classes = (dict)
         for class in (reverse classes)
-        for parsed = (parse-class class)
+        for modifiers = (tailwind-merge/modifiers::parse-modifiers class)
+        for modifier = (if modifiers
+                           (format nil "~{~a~^:~}" (tailwind-merge/modifiers::sort-modifiers modifiers))
+                           nil)
+        for base-class = (if modifiers
+                             ;; Extract base class by finding the position after the last colon in the original class
+                             (let ((last-colon-pos (position #\: class :from-end t)))
+                               (if last-colon-pos
+                                   (subseq class (1+ last-colon-pos))
+                                   class))
+                             class)
+        for parsed = (if modifier
+                         (parse-class base-class)
+                         (parse-class class))
         if (null parsed)
           collect class into results
-        else unless (gethash parsed seen-classes)
+        else unless (gethash (cons modifier parsed) seen-classes)
                collect class into results
-               and do (setf (gethash parsed seen-classes)
+               and do (setf (gethash (cons modifier parsed) seen-classes)
                             t)
         finally (return (nreverse results))))

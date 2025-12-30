@@ -10,7 +10,8 @@
   :depends-on ("hamcrest"
                "tailwind-merge-tests/merger"
                "tailwind-merge-tests/arbitrary"
-               "tailwind-merge-tests/color-validator")
+               "tailwind-merge-tests/color-validator"
+               "tailwind-merge-tests/modifiers")
   :perform (test-op (op c)
                     (unless (symbol-call :rove :run c)
                       (error "Tests failed"))))
