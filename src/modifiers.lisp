@@ -231,9 +231,12 @@
 
 
 (defparameter *order-sensitive-modifiers*
-  '("*" "**" "after" "backdrop" "before" "details-content" "file"
-    "first-letter" "first-line" "marker" "placeholder" "selection")
-  "List of modifiers whose order matters and should be preserved.")
+  (loop with result = (make-hash-table :test 'equal)
+        for modifier in '("*" "**" "after" "backdrop" "before" "details-content" "file"
+                          "first-letter" "first-line" "marker" "placeholder" "selection")
+        do (setf (gethash modifier result) t)
+        finally (return result))
+  "Dictionary of modifiers whose order matters and should be preserved.")
 
 
 (defun sort-modifiers (modifiers)
@@ -248,7 +251,7 @@
         for modifier in modifiers
         do (let ((is-arbitrary (and (>= (length modifier) 1)
                                     (char= (char modifier 0) #\[)))
-                 (is-order-sensitive (member modifier *order-sensitive-modifiers* :test #'string=)))
+                 (is-order-sensitive (gethash modifier *order-sensitive-modifiers*)))
              (cond
                ((or is-arbitrary is-order-sensitive)
                 ;; Sort and flush current segment alphabetically
