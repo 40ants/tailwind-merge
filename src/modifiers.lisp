@@ -100,14 +100,15 @@
 
 
 (defun parse-modifiers (class-string)
-  "Parses a class string to extract all modifier prefixes.
+  "Parses a class string to extract all modifier prefixes and the base class.
 
-   Returns a list of modifier prefixes if found, otherwise returns NIL.
+   Returns a list with two elements: (list of modifier prefixes, base class)
+   If no modifiers are found, returns (NIL, class-string).
 
    Examples:
-   (parse-modifiers \"hover:bg-red-500\") ; => '(\"hover\")
-   (parse-modifiers \"hover:[@media(min-width:640px)]:p-4\") ; => '(\"hover\" \"[@media(min-width:640px)]\")
-   (parse-modifiers \"bg-red-500\")       ; => NIL
+   (parse-modifiers \"hover:bg-red-500\") ; => '(\"hover\" \"bg-red-500\")
+   (parse-modifiers \"hover:[@media(min-width:640px)]:p-4\") ; => '(\"hover\" \"[@media(min-width:640px)]\" \"p-4\")
+   (parse-modifiers \"bg-red-500\")       ; => '(NIL \"bg-red-500\")
    "
   (loop with modifiers = nil
         with bracket-depth = 0
@@ -133,7 +134,8 @@
               (let ((modifier (subseq class-string modifier-start index)))
                 (push modifier modifiers)
                 (setf modifier-start (1+ index)))))
-        finally (return (nreverse modifiers))))
+        finally (let ((base-class (subseq class-string modifier-start)))
+                  (return (list (nreverse modifiers) base-class)))))
 
 
 

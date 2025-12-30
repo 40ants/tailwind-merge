@@ -73,19 +73,10 @@
    "
   (loop with seen-classes = (dict)
         for class in (reverse classes)
-        for modifiers = (parse-modifiers class)
+        for (modifiers base-class) = (parse-modifiers class)
         for modifier = (when modifiers
                          (format nil "~{~a~^:~}" (sort-modifiers modifiers)))
-        for base-class = (if modifiers
-                             ;; Extract base class by finding the position after the last colon in the original class
-                             (let ((last-colon-pos (position #\: class :from-end t)))
-                               (if last-colon-pos
-                                   (subseq class (1+ last-colon-pos))
-                                   class))
-                             class)
-        for parsed = (if modifier
-                         (parse-class base-class)
-                         (parse-class class))
+        for parsed = (parse-class base-class)
         if (null parsed)
           collect class into results
         else unless (gethash (cons modifier parsed) seen-classes)

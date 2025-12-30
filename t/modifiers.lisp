@@ -9,25 +9,40 @@
   (:import-from #:hamcrest/matchers
                 #:contains)
   (:import-from #:hamcrest/rove
-                #:assert-that))
+                #:assert-that)
+  (:import-from #:tailwind-merge/modifiers
+                #:parse-modifiers))
 (in-package #:tailwind-merge-tests/modifiers)
 
 
 (deftest test-modifier-parsing ()
   (testing "Modifier parsing"
-    ;; Test parse-modifiers function (returns list of individual modifiers)
-    (ok (equal (tailwind-merge/modifiers::parse-modifiers "hover:bg-red-500") '("hover")))
-    (ok (equal (tailwind-merge/modifiers::parse-modifiers "focus:p-4") '("focus")))
-    (ok (equal (tailwind-merge/modifiers::parse-modifiers "md:p-2") '("md")))
-    (ok (equal (tailwind-merge/modifiers::parse-modifiers "group-hover:p-4") '("group-hover")))
-    (ok (null (tailwind-merge/modifiers::parse-modifiers "p-4")))
-    (ok (null (tailwind-merge/modifiers::parse-modifiers "bg-red-500")))
-    ;; Test complex modifier with nested brackets and parentheses
-    (ok (equal (tailwind-merge/modifiers::parse-modifiers "[@supports(display:grid)]:grid") '("[@supports(display:grid)]")))
-    ;; Test multiple nested modifiers
-    (ok (equal (tailwind-merge/modifiers::parse-modifiers "hover:[@media(min-width:640px)]:p-4") '("hover" "[@media(min-width:640px)]")))
-    ;; Test modifier with arbitrary values
-    (ok (equal (tailwind-merge/modifiers::parse-modifiers "[hover]:p-4") '("[hover]")))))
+    (flet ((test-parsing (input-string expected-modifiers expected-class)
+             (let ((result (parse-modifiers input-string)))
+               (assert-that result
+                            (contains expected-modifiers expected-class)))))
+      ;; Test parse-modifiers function (returns list of (list of modifiers, base-class))
+      (test-parsing "hover:bg-red-500"
+                    '("hover") "bg-red-500")
+      (test-parsing "focus:p-4"
+                    '("focus") "p-4")
+      (test-parsing "md:p-2"
+                    '("md") "p-2")
+      (test-parsing "group-hover:p-4"
+                    '("group-hover") "p-4")
+      (test-parsing "p-4"
+                    nil "p-4")
+      (test-parsing "bg-red-500"
+                    nil"bg-red-500")
+      ;; Test complex modifier with nested brackets and parentheses
+      (test-parsing "[@supports(display:grid)]:grid"
+                    '("[@supports(display:grid)]") "grid")
+      ;; Test multiple nested modifiers
+      (test-parsing "hover:[@media(min-width:640px)]:p-4"
+                    '("hover" "[@media(min-width:640px)]") "p-4")
+      ;; Test modifier with arbitrary values
+      (test-parsing "[hover]:p-4"
+                    '("[hover]") "p-4"))))
 
 
 (deftest test-merge-tailwind-classes-with-modifiers ()
