@@ -3,11 +3,7 @@
   (:import-from #:serapeum
                 #:soft-list-of
                 #:->
-                #:dict)
-  (:export #:*modifiers*
-           #:*modifier-ordering-rules*
-           #:parse-modifier
-           #:modifier-conflicts-p))
+                #:dict))
 (in-package #:tailwind-merge/modifiers)
 
 
@@ -22,9 +18,7 @@
 ;;;
 ;;; Structure:
 ;;; - *modifiers*: A list of all known TailwindCSS modifiers
-;;; - *modifier-ordering-rules*: Rules for how modifiers should be ordered when conflicting
 ;;; - parse-modifier: Function to parse modifier prefixes from class strings
-;;; - modifier-conflicts-p: Function to determine if two modifiers conflict
 
 
 (defparameter *modifiers*
@@ -103,74 +97,6 @@
     
     ;; In variants (for styling based on any parent state)
     "in"
-    ))
-
-
-(defparameter *modifier-ordering-rules*
-  '(
-    ;; Responsive variants that conflict with each other
-    (:responsive-conflicting "sm" "md" "lg" "xl" "2xl" "max-sm" "max-md" "max-lg" "max-xl" "max-2xl"
-                             "@sm" "@md" "@lg" "@xl" "@2xl")
-
-    ;; Dark mode conflicts with itself
-    (:dark-conflicting "dark")
-
-    ;; Motion variants that conflict with each other
-    (:motion-conflicting "motion-safe" "motion-reduce")
-
-    ;; Contrast variants that conflict with each other
-    (:contrast-conflicting "contrast-more" "contrast-less")
-
-    ;; Color scheme variants that conflict with each other
-    (:color-scheme-conflicting "forced-colors" "inverted-colors")
-
-    ;; Pointer variants that conflict with each other
-    (:pointer-conflicting "pointer-fine" "pointer-coarse" "pointer-none"
-                          "any-pointer-fine" "any-pointer-coarse" "any-pointer-none")
-
-    ;; Orientation variants that conflict with each other
-    (:orientation-conflicting "portrait" "landscape")
-
-    ;; Pseudo-class variants that don't conflict with each other (can coexist)
-    (:pseudo-class "hover" "focus" "active" "visited" "focus-within" "focus-visible"
-                   "first" "last" "odd" "even" "only"
-                   "first-of-type" "last-of-type" "only-of-type"
-                   "nth" "nth-last" "nth-of-type" "nth-last-of-type"
-                   "empty" "disabled" "enabled" "checked" "indeterminate" "default" "optional" "required"
-                   "valid" "invalid" "user-valid" "user-invalid" "in-range" "out-of-range" "placeholder-shown"
-                   "target" "details-content" "autofill" "read-only")
-
-    ;; Pseudo-element variants that don't conflict with each other (can coexist)
-    (:pseudo-element "before" "after"
-                     "placeholder" "file" "marker" "selection"
-                     "first-line" "first-letter"
-                     "backdrop")
-
-    ;; Group and peer variants that don't conflict with each other (can coexist)
-    (:group-peer "group" "group-hover" "group-focus" "group-active" "group-visited" "group-focus-within"
-                 "group-focus-visible" "group-first" "group-last" "group-only" "group-even" "group-odd"
-                 "group-empty" "group-disabled" "group-enabled" "group-checked" "group-indeterminate"
-                 "group-default" "group-required" "group-valid" "group-invalid" "group-in-range"
-                 "group-out-of-range" "group-placeholder-shown" "group-autofill" "group-read-only"
-                 "group-target" "group-open" "group-closed"
-                 "peer" "peer-hover" "peer-focus" "peer-active" "peer-visited" "peer-focus-within"
-                 "peer-focus-visible" "peer-first" "peer-last" "peer-only" "peer-even" "peer-odd"
-                 "peer-empty" "peer-disabled" "peer-enabled" "peer-checked" "peer-indeterminate"
-                 "peer-default" "peer-required" "peer-valid" "peer-invalid" "peer-in-range"
-                 "peer-out-of-range" "peer-placeholder-shown" "peer-autofill" "peer-read-only"
-                 "peer-target" "peer-open" "peer-closed")
-
-    ;; Other state variants that don't conflict with each other (can coexist)
-    (:other-state "noscript" "print" "supports" "not-supports" "starting"
-                  "aria-checked" "aria-disabled" "aria-expanded" "aria-hidden" "aria-pressed"
-                  "aria-readonly" "aria-required" "aria-selected"
-                  "data" "rtl" "ltr" "open" "inert")
-
-    ;; Child selector variants that don't conflict with each other (can coexist)
-    (:child-selector "*" "**")
-
-    ;; In variants that don't conflict with each other (can coexist)
-    (:in "in")
     ))
 
 
@@ -273,33 +199,3 @@
                      (t
                       result))))))
 
-(defun modifier-conflicts-p (modifier1 modifier2)
-  "Determines if two modifiers conflict with each other.
-
-   Two modifiers conflict if they are the same modifier (e.g., 'hover' and 'hover')
-   OR if they belong to a category that ends with '-conflicting' (e.g., both are responsive modifiers).
-
-   For Tailwind's merging logic, when modifiers from conflicting categories are applied
-   to the same base class, only the last one should be kept.
-
-   Returns T if the modifiers conflict, NIL otherwise.
-   "
-  (or (string= modifier1 modifier2)  ; Same modifier conflicts with itself
-      ;; Check if both modifiers belong to the same ordering rule category that ends with "-conflicting"
-      (loop for (category . modifiers) in *modifier-ordering-rules*
-            when (and (member modifier1 modifiers :test #'string=)
-                      (member modifier2 modifiers :test #'string=)
-                      (let ((category-name (string category)))
-                        (and (>= (length category-name) 12)  ; minimum length for "-conflicting"
-                             (string= (subseq category-name (- (length category-name) 12))
-                                      "-CONFLICTING"))))
-              return t
-            finally (return nil))))
-
-
-(defun get-modifier-category (modifier)
-  "Returns the category of a given modifier, or NIL if not found."
-  (loop for (category . modifiers) in *modifier-ordering-rules*
-        when (member modifier modifiers :test #'string=)
-          return category
-        finally (return nil)))

@@ -18,8 +18,7 @@
                 #:build-classes-map
                 #:parse-class)
   (:import-from #:tailwind-merge/modifiers
-                #:parse-modifier
-                #:modifier-conflicts-p)
+                #:parse-modifier)
   (:export #:merge-tailwind-classes))
 (in-package #:tailwind-merge/merger)
 

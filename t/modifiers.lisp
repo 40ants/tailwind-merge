@@ -29,14 +29,6 @@
     (ok (string= (tailwind-merge/modifiers::parse-modifier "[hover]:p-4") "[hover]"))))
 
 
-(deftest test-modifier-conflicts ()
-  (testing "Modifier conflicts"
-    (ok (tailwind-merge/modifiers::modifier-conflicts-p "hover" "hover"))
-    (ok (not (tailwind-merge/modifiers::modifier-conflicts-p "hover" "focus")))
-    (ok (tailwind-merge/modifiers::modifier-conflicts-p "sm" "md"))  ; Both are responsive
-    (ok (not (tailwind-merge/modifiers::modifier-conflicts-p "hover" "sm")))))
-
-
 (deftest test-merge-tailwind-classes-with-modifiers ()
   (testing "Merging classes with modifiers"
     ;; Non-conflicting modifiers should be preserved
