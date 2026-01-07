@@ -1,0 +1,335 @@
+<html lang=en>
+ <head>
+  <meta charset=UTF-8><meta name=viewport
+      content="width=device-width, initial-scale=1">
+  <title>tailwind-merge - Utility library to merge Tailwind CSS classes without 
+   style conflicts.</title>
+  <link rel=alternate
+        href="https://40ants.com/tailwind-merge/changelog.xml"
+        type="application/rss+xml">
+  <link rel=stylesheet type="text/css"
+        href=theme.css>
+  <script type="text/javascript" src=jquery.js></script>
+  <script type="text/javascript" src=toc.js></script>
+  <script type="text/javascript">$(document).ready(function() {$('a:has(img)').css('border-bottom', 'none')})</script>
+  <link rel=stylesheet type="text/css"
+      href=highlight.min.css>
+  <script type="text/javascript"
+          src=highlight.min.js></script>
+  <script type="text/javascript">hljs.highlightAll();</script>
+<style type="text/css">
+/* Стили для сворачиваемого меню */
+.sidebar ul ul {
+  display: none; /* Скрываем все подменю по умолчанию */
+  margin-left: 0.5em;
+}
+
+.sidebar li.expanded > ul {
+  display: block; /* Показываем подменю для развернутых элементов */
+}
+
+/* Стили для пунктов с подменю */
+.sidebar li.has-children > a {
+  cursor: pointer;
+  position: relative;
+  padding-left: 1.2em;
+}
+
+.sidebar li.has-children > p > a {
+  position: relative;
+  left: -1rem;
+}
+
+.sidebar li.has-children > p > a::before {
+  content:"►";
+}
+
+.sidebar li.has-children.expanded > p > a::before {
+  content: "▼";
+  position: relative;
+  left: -0.08rem;
+}
+
+/* Подсветка активного пункта */
+.sidebar li.active > a {
+  font-weight: bold;
+}
+
+/* Если активная страница находится в подменю, раскрываем родителя */
+.sidebar li.active-parent {
+  font-weight: normal;
+}
+
+.sidebar li.active-parent > ul {
+  display: block;
+}
+</style>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FL71WXK73K"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-FL71WXK73K');
+    </script>
+
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+       m[i].l=1*new Date();
+       for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+       k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+       ym(42462884, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+       });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/42462884" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+
+ </head>
+ <body>
+  <div class=page><a id=fork-me href="https://github.com/40ants/tailwind-merge">Fork me on GitHub</a>
+   <div class=navbar>
+    <div class=navbar-inner>
+     <a class=brand href="/">
+      <img class=logo
+           src="https://40ants.com/img/logo.svg"></a>
+     <ul class=nav>
+      <li><a href="/posts/">Blog</a>
+      <li><a href="/ru/posts/">Blog (RU)</a>
+      <li><a href="/tips/">Lisp Tips</a>
+      <li><a href="/projects/">Our Projects</a>
+      <li><a href="/about/">About</a>
+     </ul>
+    </div>
+   </div>
+   <input type=checkbox id=sidebar-check>
+   <label for=sidebar-check>
+    <div id=sidebar-trigger>
+     <span></span><span></span><span></span>
+    </div></label><div class=sidebar><div class=header><form class=search method=GET action="search/">
+      <input type=text name=q>
+      <input type=submit value=Search><span id=search-progress></span>
+     </form>
+    </div><div class=content><div class=page-toc><ul><li><p><a href="#x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-40INDEX-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" data-document="" data-node="x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-40INDEX-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29">tailwind-merge - Utility library to merge Tailwind CSS classes without style conflicts.</a></p><ul><li><p><a href="#tailwind-merge-asdf-system-details" data-document="" data-node="tailwind-merge-asdf-system-details">TAILWIND-MERGE ASDF System Details</a></p></li><li><p><a href="#x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-3A-40INSTALLATION-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" data-document="" data-node="x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-3A-40INSTALLATION-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29">Installation</a></p></li><li><p><a href="#x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-3A-40USAGE-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" data-document="" data-node="x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-3A-40USAGE-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29">Usage</a></p></li><li><p><a href="#x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-3A-40API-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" data-document="" data-node="x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-3A-40API-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29">API</a></p><ul><li><p><a href="#x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-3A-40TAILWIND-MERGE-2FMERGER-3FPACKAGE-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" data-document="" data-node="x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-3A-40TAILWIND-MERGE-2FMERGER-3FPACKAGE-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29">TAILWIND-MERGE/MERGER</a></p><ul><li><p><a href="#x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-3A-7C-40TAILWIND-MERGE-2FMERGER-3FFunctions-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" data-document="" data-node="x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-3A-7C-40TAILWIND-MERGE-2FMERGER-3FFunctions-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29">Functions</a></p></li></ul></li><li><p><a href="#x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-3A-40TAILWIND-MERGE-2FVALIDATORS-3FPACKAGE-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" data-document="" data-node="x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-3A-40TAILWIND-MERGE-2FVALIDATORS-3FPACKAGE-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29">TAILWIND-MERGE/VALIDATORS</a></p><ul><li><p><a href="#x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-3A-7C-40TAILWIND-MERGE-2FVALIDATORS-3FFunctions-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" data-document="" data-node="x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-3A-7C-40TAILWIND-MERGE-2FVALIDATORS-3FFunctions-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29">Functions</a></p></li></ul></li><li><p><a href="#x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-3A-40TAILWIND-MERGE-2FVARS-3FPACKAGE-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" data-document="" data-node="x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-3A-40TAILWIND-MERGE-2FVARS-3FPACKAGE-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29">TAILWIND-MERGE/VARS</a></p><ul><li><p><a href="#x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-3A-7C-40TAILWIND-MERGE-2FVARS-3FVariables-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" data-document="" data-node="x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-3A-7C-40TAILWIND-MERGE-2FVARS-3FVariables-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29">Variables</a></p></li></ul></li></ul></li></ul></li><li><p><a href="changelog/#x-28TAILWIND-MERGE-DOCS-2FCHANGELOG-3A-40CHANGELOG-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" data-document="changelog/" data-node="x-28TAILWIND-MERGE-DOCS-2FCHANGELOG-3A-40CHANGELOG-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29">ChangeLog</a></p></li></ul>
+     </div>
+    </div><div class=footer>
+     <a href="https://40ants.com/doc">[generated by 40ANTS-DOC]</a>
+    </div>
+   </div><div class=content role=main><h1>tailwind-merge - Utility library to merge Tailwind CSS classes without style conflicts.<a class=header-link
+     href=#x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-40INDEX-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29
+     title="Permalink to this headline"
+     id=x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-40INDEX-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29></a></h1><h2 id="tailwind-merge-asdf-system-details">TAILWIND-MERGE ASDF System Details</h2><ul><li><p>Description: Utility library to merge Tailwind <code>CSS</code> classes without style conflicts.</p></li><li><p>Licence: Unlicense</p></li><li><p>Author: Alexander Artemenko &lt;svetlyak.40wt@gmail.com&gt;</p></li><li><p>Homepage: <a href="https://40ants.com/tailwind-merge/">https://40ants.com/tailwind-merge/</a></p></li><li><p>Bug tracker: <a href="https://github.com/40ants/tailwind-merge/issues">https://github.com/40ants/tailwind-merge/issues</a></p></li><li><p>Source control: <a href="https://github.com/40ants/tailwind-merge">GIT</a></p></li><li><p>Depends on: <a href="https://quickdocs.org/alexandria">alexandria</a>, <a href="https://quickdocs.org/parse-number">parse-number</a>, <a href="https://quickdocs.org/serapeum">serapeum</a></p></li></ul><p><a href="https://github.com/40ants/tailwind-merge/actions"><img src="https://github-actions.40ants.com/40ants/tailwind-merge/matrix.svg?only=ci.run-tests"/></a></p><p><img src="http://quickdocs.org/badge/tailwind-merge.svg"/></p><h2>Installation<a class=header-link
+     href=#x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-3A-40INSTALLATION-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29
+     title="Permalink to this headline"
+     id=x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-3A-40INSTALLATION-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29></a></h2><p>You can install this library from Quicklisp, but you want to receive updates quickly, then install it from Ultralisp.org:</p><pre><code class="">(ql-dist:install-dist &quot;http://dist.ultralisp.org/&quot;
+                      :prompt nil)
+(ql:quickload :tailwind-merge)</code></pre><h2>Usage<a class=header-link
+     href=#x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-3A-40USAGE-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29
+     title="Permalink to this headline"
+     id=x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-3A-40USAGE-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29></a></h2><p>The <a href="https://40ants.com/tailwind-merge/#x-28TAILWIND-MERGE-2FMERGER-3AMERGE-TAILWIND-CLASSES-20FUNCTION-29" data-document="https://40ants.com/tailwind-merge/" data-node="x-28TAILWIND-MERGE-2FMERGER-3AMERGE-TAILWIND-CLASSES-20FUNCTION-29"><code>tailwind-merge:merge-tailwind-classes</code></a> function allows you to merge Tailwind <code>CSS</code> classes while resolving conflicts between them. It keeps the last class in case of conflicts.</p><pre><code class="lisp">;; Basic class merging - conflicting classes are resolved by keeping the last one
+(merge-tailwind-classes '(&quot;px-2&quot; &quot;px-3&quot;))
+;; =&gt; (&quot;px-3&quot;)
+
+(merge-tailwind-classes '(&quot;py-2&quot; &quot;px-3&quot;))
+;; =&gt; (&quot;py-2&quot; &quot;px-3&quot;)  ; Non-conflicting classes are both kept
+
+(merge-tailwind-classes '(&quot;bg-red-500&quot; &quot;bg-blue-500&quot;))
+;; =&gt; (&quot;bg-blue-500&quot;)
+
+;; Conflict resolution - the last class wins
+(merge-tailwind-classes '(&quot;h-10&quot; &quot;h-min&quot;))
+;; =&gt; (&quot;h-min&quot;)
+
+(merge-tailwind-classes '(&quot;mix-blend-normal&quot; &quot;mix-blend-multiply&quot;))
+;; =&gt; (&quot;mix-blend-multiply&quot;)
+
+;; Non-conflicting classes are preserved
+(merge-tailwind-classes '(&quot;stroke-black&quot; &quot;stroke-1&quot;))
+;; =&gt; (&quot;stroke-black&quot; &quot;stroke-1&quot;)
+
+(merge-tailwind-classes '(&quot;outline-black&quot; &quot;outline-1&quot;))
+;; =&gt; (&quot;outline-black&quot; &quot;outline-1&quot;)
+
+;; Arbitrary values support
+(merge-tailwind-classes '(&quot;stroke-2&quot; &quot;stroke-[3]&quot;))
+;; =&gt; (&quot;stroke-[3]&quot;)
+
+(merge-tailwind-classes '(&quot;grayscale-0&quot; &quot;grayscale-[50%]&quot;))
+;; =&gt; (&quot;grayscale-[50%]&quot;)
+
+(merge-tailwind-classes '(&quot;grow&quot; &quot;grow-[2]&quot;))
+;; =&gt; (&quot;grow-[2]&quot;)</code></pre><h2>API<a class=header-link
+     href=#x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-3A-40API-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29
+     title="Permalink to this headline"
+     id=x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-3A-40API-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29></a></h2><h3>TAILWIND-MERGE/MERGER<a class=header-link
+     href=#x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-3A-40TAILWIND-MERGE-2FMERGER-3FPACKAGE-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29
+     title="Permalink to this headline"
+     id=x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-3A-40TAILWIND-MERGE-2FMERGER-3FPACKAGE-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29></a></h3><div class=reference-bullet><div class=reference-bullet-header><a class=locative-type href="https://github.com/40ants/tailwind-merge/blob/01daeaa52129a3fb28c3e7227e3d50829c5d4b5a/src/merger.lisp#L1">package</a><div class=reference-object><div class=object-name><a href=#x-28-23A-28-2821-29-20BASE-CHAR-20-2E-20-22TAILWIND-MERGE-2FMERGER-22-29-20PACKAGE-29 id=x-28-23A-28-2821-29-20BASE-CHAR-20-2E-20-22TAILWIND-MERGE-2FMERGER-22-29-20PACKAGE-29>tailwind-merge/merger</a></div></div><a class=bullet-link href=#x-28-23A-28-2821-29-20BASE-CHAR-20-2E-20-22TAILWIND-MERGE-2FMERGER-22-29-20PACKAGE-29></a></div></div><h4>Functions<a class=header-link
+     href=#x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-3A-7C-40TAILWIND-MERGE-2FMERGER-3FFunctions-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29
+     title="Permalink to this headline"
+     id=x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-3A-7C-40TAILWIND-MERGE-2FMERGER-3FFunctions-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29></a></h4><div class=reference-bullet><div class=reference-bullet-header><a class=locative-type href="https://github.com/40ants/tailwind-merge/blob/01daeaa52129a3fb28c3e7227e3d50829c5d4b5a/src/merger.lisp#L30">function</a><div class=reference-object><div class=object-name><a href=#x-28TAILWIND-MERGE-2FMERGER-3AMERGE-TAILWIND-CLASSES-20FUNCTION-29 id=x-28TAILWIND-MERGE-2FMERGER-3AMERGE-TAILWIND-CLASSES-20FUNCTION-29>tailwind-merge/merger:merge-tailwind-classes</a></div><div class=object-args><span class=locative-args>classes</span></div></div><a class=bullet-link href=#x-28TAILWIND-MERGE-2FMERGER-3AMERGE-TAILWIND-CLASSES-20FUNCTION-29></a></div><div class=bullet-content><p>Merges Tailwind <code>CSS</code> classes while resolving conflicts between them.</p><p>This function takes a list of <code>CSS</code> class strings and returns a new list with
+conflicting classes resolved. When multiple classes from the same group are
+present, only the last one (in order) is kept, effectively overriding the
+previous ones.</p><p>For example, if both 'px-2' and 'px-3' are in the input, only 'px-3' will
+appear in the output since both belong to the same padding-x group.</p><p>Non-conflicting classes are preserved in the output.</p><p>Args:</p><ul><li><p><code>CLASSES</code>: A list of strings representing Tailwind <code>CSS</code> classes.</p></li></ul><p>Returns:</p><p>A list of strings with conflicting classes resolved, keeping only the last
+class in case of conflicts.</p><p>Examples:</p><pre><code class="lisp">(merge-tailwind-classes '(&quot;px-2&quot; &quot;px-3&quot;))
+;; =&gt; (&quot;px-3&quot;)
+
+(merge-tailwind-classes '(&quot;py-2&quot; &quot;px-3&quot;))
+;; =&gt; (&quot;py-2&quot; &quot;px-3&quot;)
+
+(merge-tailwind-classes '(&quot;bg-red-500&quot; &quot;bg-blue-500&quot;))
+;; =&gt; (&quot;bg-blue-500&quot;)
+
+(merge-tailwind-classes '(&quot;p-2&quot; &quot;hover:p-4&quot;))
+;; =&gt; (&quot;p-2&quot; &quot;hover:p-4&quot;)
+
+(merge-tailwind-classes '(&quot;hover:p-2&quot; &quot;hover:p-4&quot;))
+;; =&gt; (&quot;hover:p-4&quot;)
+
+(merge-tailwind-classes '(&quot;hover:focus:p-2&quot; &quot;focus:hover:p-4&quot;))
+;; =&gt; (&quot;focus:hover:p-4&quot;)</code></pre></div></div><h3>TAILWIND-MERGE/VALIDATORS<a class=header-link
+     href=#x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-3A-40TAILWIND-MERGE-2FVALIDATORS-3FPACKAGE-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29
+     title="Permalink to this headline"
+     id=x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-3A-40TAILWIND-MERGE-2FVALIDATORS-3FPACKAGE-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29></a></h3><div class=reference-bullet><div class=reference-bullet-header><a class=locative-type href="https://github.com/40ants/tailwind-merge/blob/01daeaa52129a3fb28c3e7227e3d50829c5d4b5a/src/validators.lisp#L1">package</a><div class=reference-object><div class=object-name><a href=#x-28-23A-28-2825-29-20BASE-CHAR-20-2E-20-22TAILWIND-MERGE-2FVALIDATORS-22-29-20PACKAGE-29 id=x-28-23A-28-2825-29-20BASE-CHAR-20-2E-20-22TAILWIND-MERGE-2FVALIDATORS-22-29-20PACKAGE-29>tailwind-merge/validators</a></div></div><a class=bullet-link href=#x-28-23A-28-2825-29-20BASE-CHAR-20-2E-20-22TAILWIND-MERGE-2FVALIDATORS-22-29-20PACKAGE-29></a></div></div><h4>Functions<a class=header-link
+     href=#x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-3A-7C-40TAILWIND-MERGE-2FVALIDATORS-3FFunctions-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29
+     title="Permalink to this headline"
+     id=x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-3A-7C-40TAILWIND-MERGE-2FVALIDATORS-3FFunctions-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29></a></h4><div class=reference-bullet><div class=reference-bullet-header><a class=locative-type href="https://github.com/40ants/tailwind-merge/blob/01daeaa52129a3fb28c3e7227e3d50829c5d4b5a/src/validators.lisp#L104">function</a><div class=reference-object><div class=object-name><a href=#x-28TAILWIND-MERGE-2FVALIDATORS-3ACOLORP-20FUNCTION-29 id=x-28TAILWIND-MERGE-2FVALIDATORS-3ACOLORP-20FUNCTION-29>tailwind-merge/validators:colorp</a></div><div class=object-args><span class=locative-args>value</span></div></div><a class=bullet-link href=#x-28TAILWIND-MERGE-2FVALIDATORS-3ACOLORP-20FUNCTION-29></a></div><div class=bullet-content><p>Matches Tailwind <code>CSS</code> color values like 'slate-600', 'red-500', 'black', 'white', 'transparent', etc.</p></div></div><div class=reference-bullet><div class=reference-bullet-header><a class=locative-type href="https://github.com/40ants/tailwind-merge/blob/01daeaa52129a3fb28c3e7227e3d50829c5d4b5a/src/validators.lisp#L94">function</a><div class=reference-object><div class=object-name><a href=#x-28TAILWIND-MERGE-2FVALIDATORS-3AEMPTY-OR-NUMBER-P-20FUNCTION-29 id=x-28TAILWIND-MERGE-2FVALIDATORS-3AEMPTY-OR-NUMBER-P-20FUNCTION-29>tailwind-merge/validators:empty-or-number-p</a></div><div class=object-args><span class=locative-args>value</span></div></div><a class=bullet-link href=#x-28TAILWIND-MERGE-2FVALIDATORS-3AEMPTY-OR-NUMBER-P-20FUNCTION-29></a></div><div class=bullet-content><p>Matches empty string or number values (for classes like 'border' or 'border-2').</p></div></div><div class=reference-bullet><div class=reference-bullet-header><a class=locative-type href="https://github.com/40ants/tailwind-merge/blob/01daeaa52129a3fb28c3e7227e3d50829c5d4b5a/src/validators.lisp#L52">function</a><div class=reference-object><div class=object-name><a href=#x-28TAILWIND-MERGE-2FVALIDATORS-3AFRACTION-VALUE-P-20FUNCTION-29 id=x-28TAILWIND-MERGE-2FVALIDATORS-3AFRACTION-VALUE-P-20FUNCTION-29>tailwind-merge/validators:fraction-value-p</a></div><div class=object-args><span class=locative-args>value</span></div></div><a class=bullet-link href=#x-28TAILWIND-MERGE-2FVALIDATORS-3AFRACTION-VALUE-P-20FUNCTION-29></a></div><div class=bullet-content><p>Matches fractions like 1/2, 1/3, 2/3, etc.</p></div></div><div class=reference-bullet><div class=reference-bullet-header><a class=locative-type href="https://github.com/40ants/tailwind-merge/blob/01daeaa52129a3fb28c3e7227e3d50829c5d4b5a/src/validators.lisp#L31">function</a><div class=reference-object><div class=object-name><a href=#x-28TAILWIND-MERGE-2FVALIDATORS-3AINTEGER-VALUE-P-20FUNCTION-29 id=x-28TAILWIND-MERGE-2FVALIDATORS-3AINTEGER-VALUE-P-20FUNCTION-29>tailwind-merge/validators:integer-value-p</a></div><div class=object-args><span class=locative-args>value</span></div></div><a class=bullet-link href=#x-28TAILWIND-MERGE-2FVALIDATORS-3AINTEGER-VALUE-P-20FUNCTION-29></a></div><div class=bullet-content><p>Matches integer values like 0, 1, 2, 100, etc.</p></div></div><div class=reference-bullet><div class=reference-bullet-header><a class=locative-type href="https://github.com/40ants/tailwind-merge/blob/01daeaa52129a3fb28c3e7227e3d50829c5d4b5a/src/validators.lisp#L131">function</a><div class=reference-object><div class=object-name><a href=#x-28TAILWIND-MERGE-2FVALIDATORS-3AMAKE-VALIDATORS-FROM-RULE-20FUNCTION-29 id=x-28TAILWIND-MERGE-2FVALIDATORS-3AMAKE-VALIDATORS-FROM-RULE-20FUNCTION-29>tailwind-merge/validators:make-validators-from-rule</a></div><div class=object-args><span class=locative-args>rule</span></div></div><a class=bullet-link href=#x-28TAILWIND-MERGE-2FVALIDATORS-3AMAKE-VALIDATORS-FROM-RULE-20FUNCTION-29></a></div></div><div class=reference-bullet><div class=reference-bullet-header><a class=locative-type href="https://github.com/40ants/tailwind-merge/blob/01daeaa52129a3fb28c3e7227e3d50829c5d4b5a/src/validators.lisp#L41">function</a><div class=reference-object><div class=object-name><a href=#x-28TAILWIND-MERGE-2FVALIDATORS-3ANUMBER-VALUE-P-20FUNCTION-29 id=x-28TAILWIND-MERGE-2FVALIDATORS-3ANUMBER-VALUE-P-20FUNCTION-29>tailwind-merge/validators:number-value-p</a></div><div class=object-args><span class=locative-args>value</span></div></div><a class=bullet-link href=#x-28TAILWIND-MERGE-2FVALIDATORS-3ANUMBER-VALUE-P-20FUNCTION-29></a></div><div class=bullet-content><p>Matches any number including decimals like 0.5, 1.5, etc.</p></div></div><div class=reference-bullet><div class=reference-bullet-header><a class=locative-type href="https://github.com/40ants/tailwind-merge/blob/01daeaa52129a3fb28c3e7227e3d50829c5d4b5a/src/validators.lisp#L83">function</a><div class=reference-object><div class=object-name><a href=#x-28TAILWIND-MERGE-2FVALIDATORS-3APERCENT-VALUE-P-20FUNCTION-29 id=x-28TAILWIND-MERGE-2FVALIDATORS-3APERCENT-VALUE-P-20FUNCTION-29>tailwind-merge/validators:percent-value-p</a></div><div class=object-args><span class=locative-args>value</span></div></div><a class=bullet-link href=#x-28TAILWIND-MERGE-2FVALIDATORS-3APERCENT-VALUE-P-20FUNCTION-29></a></div><div class=bullet-content><p>Matches percentage values like 50%, 100%, etc.</p></div></div><div class=reference-bullet><div class=reference-bullet-header><a class=locative-type href="https://github.com/40ants/tailwind-merge/blob/01daeaa52129a3fb28c3e7227e3d50829c5d4b5a/src/validators.lisp#L68">function</a><div class=reference-object><div class=object-name><a href=#x-28TAILWIND-MERGE-2FVALIDATORS-3ATSHIRT-SIZE-P-20FUNCTION-29 id=x-28TAILWIND-MERGE-2FVALIDATORS-3ATSHIRT-SIZE-P-20FUNCTION-29>tailwind-merge/validators:tshirt-size-p</a></div><div class=object-args><span class=locative-args>value</span></div></div><a class=bullet-link href=#x-28TAILWIND-MERGE-2FVALIDATORS-3ATSHIRT-SIZE-P-20FUNCTION-29></a></div><div class=bullet-content><p>Matches t-shirt sizes like xs, sm, md, lg, xl, 2xl, 3xl, etc.</p></div></div><h3>TAILWIND-MERGE/VARS<a class=header-link
+     href=#x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-3A-40TAILWIND-MERGE-2FVARS-3FPACKAGE-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29
+     title="Permalink to this headline"
+     id=x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-3A-40TAILWIND-MERGE-2FVARS-3FPACKAGE-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29></a></h3><div class=reference-bullet><div class=reference-bullet-header><a class=locative-type href="https://github.com/40ants/tailwind-merge/blob/01daeaa52129a3fb28c3e7227e3d50829c5d4b5a/src/vars.lisp#L1">package</a><div class=reference-object><div class=object-name><a href=#x-28-23A-28-2819-29-20BASE-CHAR-20-2E-20-22TAILWIND-MERGE-2FVARS-22-29-20PACKAGE-29 id=x-28-23A-28-2819-29-20BASE-CHAR-20-2E-20-22TAILWIND-MERGE-2FVARS-22-29-20PACKAGE-29>tailwind-merge/vars</a></div></div><a class=bullet-link href=#x-28-23A-28-2819-29-20BASE-CHAR-20-2E-20-22TAILWIND-MERGE-2FVARS-22-29-20PACKAGE-29></a></div></div><h4>Variables<a class=header-link
+     href=#x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-3A-7C-40TAILWIND-MERGE-2FVARS-3FVariables-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29
+     title="Permalink to this headline"
+     id=x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-3A-7C-40TAILWIND-MERGE-2FVARS-3FVariables-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29></a></h4><div class=reference-bullet><div class=reference-bullet-header><a class=locative-type href="https://github.com/40ants/tailwind-merge/blob/01daeaa52129a3fb28c3e7227e3d50829c5d4b5a/src/vars.lisp#L14">variable</a><div class=reference-object><div class=object-name><a href=#x-28TAILWIND-MERGE-2FVARS-3A-2ABASIC-COLOR-NAMES-2A-20-28VARIABLE-29-29 id=x-28TAILWIND-MERGE-2FVARS-3A-2ABASIC-COLOR-NAMES-2A-20-28VARIABLE-29-29>tailwind-merge/vars:*basic-color-names*</a></div><div class=object-args><span class=locative-args>(&quot;black&quot; &quot;white&quot; &quot;transparent&quot; &quot;current&quot; &quot;inherit&quot;)</span></div></div><a class=bullet-link href=#x-28TAILWIND-MERGE-2FVARS-3A-2ABASIC-COLOR-NAMES-2A-20-28VARIABLE-29-29></a></div><div class=bullet-content><p>Tailwind<code>CSS</code> basic color names which do not have a shade.</p></div></div><div class=reference-bullet><div class=reference-bullet-header><a class=locative-type href="https://github.com/40ants/tailwind-merge/blob/01daeaa52129a3fb28c3e7227e3d50829c5d4b5a/src/vars.lisp#L9">variable</a><div class=reference-object><div class=object-name><a href=#x-28TAILWIND-MERGE-2FVARS-3A-2ACOLOR-NAMES-2A-20-28VARIABLE-29-29 id=x-28TAILWIND-MERGE-2FVARS-3A-2ACOLOR-NAMES-2A-20-28VARIABLE-29-29>tailwind-merge/vars:*color-names*</a></div><div class=object-args><span class=locative-args>(&quot;slate&quot; &quot;gray&quot; &quot;zinc&quot; &quot;neutral&quot; &quot;stone&quot; &quot;red&quot; &quot;orange&quot; &quot;amber&quot; &quot;yellow&quot; &quot;lime&quot;
+ &quot;green&quot; &quot;emerald&quot; &quot;teal&quot; &quot;cyan&quot; &quot;sky&quot; &quot;blue&quot; &quot;indigo&quot; &quot;violet&quot; &quot;purple&quot;
+ &quot;fuchsia&quot; &quot;pink&quot; &quot;rose&quot; &quot;black&quot; &quot;white&quot;)</span></div></div><a class=bullet-link href=#x-28TAILWIND-MERGE-2FVARS-3A-2ACOLOR-NAMES-2A-20-28VARIABLE-29-29></a></div><div class=bullet-content><p>Tailwind<code>CSS</code> color names.</p></div></div><div class=reference-bullet><div class=reference-bullet-header><a class=locative-type href="https://github.com/40ants/tailwind-merge/blob/01daeaa52129a3fb28c3e7227e3d50829c5d4b5a/src/vars.lisp#L19">variable</a><div class=reference-object><div class=object-name><a href=#x-28TAILWIND-MERGE-2FVARS-3A-2ACOLOR-SHADES-2A-20-28VARIABLE-29-29 id=x-28TAILWIND-MERGE-2FVARS-3A-2ACOLOR-SHADES-2A-20-28VARIABLE-29-29>tailwind-merge/vars:*color-shades*</a></div><div class=object-args><span class=locative-args>(&quot;50&quot; &quot;100&quot; &quot;200&quot; &quot;300&quot; &quot;400&quot; &quot;500&quot; &quot;600&quot; &quot;700&quot; &quot;800&quot; &quot;900&quot; &quot;950&quot;)</span></div></div><a class=bullet-link href=#x-28TAILWIND-MERGE-2FVARS-3A-2ACOLOR-SHADES-2A-20-28VARIABLE-29-29></a></div><div class=bullet-content><p>Tailwind<code>CSS</code> color names.</p></div></div>
+   </div><div class=footer>
+    <hr class=separator>
+    <p class=fineprint>Created with passion by <em>40Ants</em><a class=lisp-logo
+     href="http://lisp-lang.org/">
+      <img
+           src="https://40ants.com/img/made-with-lisp.svg"></a>
+   </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Ключ для localStorage
+  const STORAGE_KEY = 'tailwind-merge-docs-menu-state';
+  
+  // Загружаем сохраненное состояние меню
+  function loadMenuState() {
+    try {
+      const savedState = localStorage.getItem(STORAGE_KEY);
+      return savedState ? JSON.parse(savedState) : {};
+    } catch (e) {
+      console.error('Ошибка при загрузке состояния меню:', e);
+      return {};
+    }
+  }
+  
+  // Сохраняем текущее состояние меню
+  function saveMenuState(state) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch (e) {
+      console.error('Ошибка при сохранении состояния меню:', e);
+    }
+  }
+  
+  // Получаем уникальный идентификатор для пункта меню
+  function getMenuItemId(item) {
+    const link = item.querySelector('a');
+    if (!link) return null;
+    
+    // Используем текст ссылки как идентификатор
+    // Можно также использовать href, но он может меняться в зависимости от текущей страницы
+    return link.innerText.trim();
+  }
+  
+  // Загружаем сохраненное состояние
+  const menuState = loadMenuState();
+  
+  // Находим все пункты меню с подпунктами
+  const menuItems = document.querySelectorAll('.sidebar li');
+  
+  // Обрабатываем каждый пункт меню
+  menuItems.forEach(item => {
+    const subMenu = item.querySelector('ul');
+    
+    // Если у пункта есть подменю
+    if (subMenu) {
+      const itemId = getMenuItemId(item);
+      item.classList.add('has-children');
+      
+      // Восстанавливаем состояние из localStorage, если оно сохранено
+      if (itemId && menuState[itemId]) {
+        item.classList.add('expanded');
+      }
+      
+      // Добавляем обработчик клика
+      const link = item.querySelector('a');
+      if (link) {
+        link.addEventListener('click', function(e) {
+          // Останавливаем переход по ссылке только если кликнули по пункту с подменю
+          if (item.classList.contains('has-children')) {
+            e.preventDefault();
+            
+            // Переключаем класс для раскрытия/скрытия
+            item.classList.toggle('expanded');
+            
+            // Сохраняем новое состояние
+            if (itemId) {
+              if (item.classList.contains('expanded')) {
+                menuState[itemId] = true;
+              } else {
+                delete menuState[itemId];
+              }
+              saveMenuState(menuState);
+            }
+          }
+        });
+      }
+    }
+  });
+  
+  // Функция для поиска и раскрытия родителей активного пункта
+  function expandActiveItemParents() {
+    const activeItem = document.querySelector('.sidebar li.active');
+    if (activeItem) {
+      let parent = activeItem.parentElement;
+      
+      while (parent) {
+        if (parent.tagName === 'UL' && parent.parentElement && parent.parentElement.tagName === 'LI') {
+          parent.parentElement.classList.add('expanded');
+          parent.parentElement.classList.add('active-parent');
+          
+          // Сохраняем состояние активного родителя
+          const parentItem = parent.parentElement;
+          const parentId = getMenuItemId(parentItem);
+          if (parentId) {
+            menuState[parentId] = true;
+          }
+        }
+        parent = parent.parentElement;
+      }
+      
+      // Сохраняем обновленное состояние после раскрытия активных родителей
+      saveMenuState(menuState);
+    }
+  }
+  
+  // Запускаем функцию для текущей страницы
+  expandActiveItemParents();
+});
+</script>
+
+
+  </div>
+ </body>
+</html>
