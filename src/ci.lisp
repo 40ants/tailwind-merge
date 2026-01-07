@@ -16,10 +16,7 @@
   :on-pull-request t
   :cache t
   :jobs ((40ants-ci/jobs/linter:linter
-          ;; Until the problem with
-          ;; Bug in readtable iterators or concurrent access?
-          ;; will not be resolved:
-          :lisp "sbcl-bin/2.5.10"
+          :lisp "sbcl-bin"
           :asdf-systems ("tailwind-merge"
                          "tailwind-merge-docs"
                          "tailwind-merge-tests"))))
@@ -30,10 +27,7 @@
   :on-pull-request t
   :cache t
   :jobs ((build-docs
-          ;; Until the problem with
-          ;; Bug in readtable iterators or concurrent access?
-          ;; will not be resolved:
-          :lisp "sbcl-bin/2.5.10"
+          :lisp "sbcl-bin"
           :asdf-system "tailwind-merge-docs")))
 
 
@@ -44,12 +38,6 @@
   :cache t
   :jobs ((run-tests
           :asdf-system "tailwind-merge"
-          :lisp (;; "sbcl-bin"
-                 ;; Until the problem with
-                 ;; Bug in readtable iterators or concurrent access?
-                 ;; will not be resolved:
-                 "sbcl-bin/2.5.10"
-                 ;; Issue https://github.com/roswell/roswell/issues/534
-                 ;; is still reproduces on 2023-02-06:
-                 "ccl-bin/1.12.0")
+          :lisp ("sbcl-bin"
+                 "ccl-bin")
           :coverage t)))
