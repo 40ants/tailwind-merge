@@ -80,7 +80,7 @@ The [`tailwind-merge:merge-tailwind-classes`][fdff] function allows you to merge
 
 <a id="x-28-23A-28-2821-29-20BASE-CHAR-20-2E-20-22TAILWIND-MERGE-2FMERGER-22-29-20PACKAGE-29"></a>
 
-#### [package](5abd) `tailwind-merge/merger`
+#### [package](a002) `tailwind-merge/merger`
 
 <a id="x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-3A-7C-40TAILWIND-MERGE-2FMERGER-3FFunctions-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
@@ -88,7 +88,7 @@ The [`tailwind-merge:merge-tailwind-classes`][fdff] function allows you to merge
 
 <a id="x-28TAILWIND-MERGE-2FMERGER-3AMERGE-TAILWIND-CLASSES-20FUNCTION-29"></a>
 
-##### [function](42e8) `tailwind-merge/merger:merge-tailwind-classes` classes
+##### [function](127b) `tailwind-merge/merger:merge-tailwind-classes` classes
 
 Merges Tailwind `CSS` classes while resolving conflicts between them.
 
@@ -138,7 +138,7 @@ Examples:
 
 <a id="x-28-23A-28-2825-29-20BASE-CHAR-20-2E-20-22TAILWIND-MERGE-2FVALIDATORS-22-29-20PACKAGE-29"></a>
 
-#### [package](c218) `tailwind-merge/validators`
+#### [package](c486) `tailwind-merge/validators`
 
 <a id="x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-3A-7C-40TAILWIND-MERGE-2FVALIDATORS-3FFunctions-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
@@ -146,47 +146,47 @@ Examples:
 
 <a id="x-28TAILWIND-MERGE-2FVALIDATORS-3ACOLORP-20FUNCTION-29"></a>
 
-##### [function](5b0c) `tailwind-merge/validators:colorp` value
+##### [function](4038) `tailwind-merge/validators:colorp` value
 
 Matches Tailwind `CSS` color values like 'slate-600', 'red-500', 'black', 'white', 'transparent', etc.
 
 <a id="x-28TAILWIND-MERGE-2FVALIDATORS-3AEMPTY-OR-NUMBER-P-20FUNCTION-29"></a>
 
-##### [function](00ef) `tailwind-merge/validators:empty-or-number-p` value
+##### [function](2423) `tailwind-merge/validators:empty-or-number-p` value
 
 Matches empty string or number values (for classes like 'border' or 'border-2').
 
 <a id="x-28TAILWIND-MERGE-2FVALIDATORS-3AFRACTION-VALUE-P-20FUNCTION-29"></a>
 
-##### [function](649e) `tailwind-merge/validators:fraction-value-p` value
+##### [function](ba3b) `tailwind-merge/validators:fraction-value-p` value
 
 Matches fractions like 1/2, 1/3, 2/3, etc.
 
 <a id="x-28TAILWIND-MERGE-2FVALIDATORS-3AINTEGER-VALUE-P-20FUNCTION-29"></a>
 
-##### [function](bd14) `tailwind-merge/validators:integer-value-p` value
+##### [function](6858) `tailwind-merge/validators:integer-value-p` value
 
 Matches integer values like 0, 1, 2, 100, etc.
 
 <a id="x-28TAILWIND-MERGE-2FVALIDATORS-3AMAKE-VALIDATORS-FROM-RULE-20FUNCTION-29"></a>
 
-##### [function](2f7b) `tailwind-merge/validators:make-validators-from-rule` rule
+##### [function](69f3) `tailwind-merge/validators:make-validators-from-rule` rule
 
 <a id="x-28TAILWIND-MERGE-2FVALIDATORS-3ANUMBER-VALUE-P-20FUNCTION-29"></a>
 
-##### [function](9272) `tailwind-merge/validators:number-value-p` value
+##### [function](88bf) `tailwind-merge/validators:number-value-p` value
 
 Matches any number including decimals like 0.5, 1.5, etc.
 
 <a id="x-28TAILWIND-MERGE-2FVALIDATORS-3APERCENT-VALUE-P-20FUNCTION-29"></a>
 
-##### [function](56c1) `tailwind-merge/validators:percent-value-p` value
+##### [function](e838) `tailwind-merge/validators:percent-value-p` value
 
 Matches percentage values like 50%, 100%, etc.
 
 <a id="x-28TAILWIND-MERGE-2FVALIDATORS-3ATSHIRT-SIZE-P-20FUNCTION-29"></a>
 
-##### [function](3c85) `tailwind-merge/validators:tshirt-size-p` value
+##### [function](202d) `tailwind-merge/validators:tshirt-size-p` value
 
 Matches t-shirt sizes like xs, sm, md, lg, xl, 2xl, 3xl, etc.
 
@@ -196,7 +196,7 @@ Matches t-shirt sizes like xs, sm, md, lg, xl, 2xl, 3xl, etc.
 
 <a id="x-28-23A-28-2819-29-20BASE-CHAR-20-2E-20-22TAILWIND-MERGE-2FVARS-22-29-20PACKAGE-29"></a>
 
-#### [package](b799) `tailwind-merge/vars`
+#### [package](7937) `tailwind-merge/vars`
 
 <a id="x-28TAILWIND-MERGE-DOCS-2FINDEX-3A-3A-7C-40TAILWIND-MERGE-2FVARS-3FVariables-SECTION-7C-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29"></a>
 
@@ -204,13 +204,13 @@ Matches t-shirt sizes like xs, sm, md, lg, xl, 2xl, 3xl, etc.
 
 <a id="x-28TAILWIND-MERGE-2FVARS-3A-2ABASIC-COLOR-NAMES-2A-20-28VARIABLE-29-29"></a>
 
-##### [variable](1287) `tailwind-merge/vars:*basic-color-names*` ("black" "white" "transparent" "current" "inherit")
+##### [variable](3781) `tailwind-merge/vars:*basic-color-names*` ("black" "white" "transparent" "current" "inherit")
 
 Tailwind`CSS` basic color names which do not have a shade.
 
 <a id="x-28TAILWIND-MERGE-2FVARS-3A-2ACOLOR-NAMES-2A-20-28VARIABLE-29-29"></a>
 
-##### [variable](76ab) `tailwind-merge/vars:*color-names*` ("slate" "gray" "zinc" "neutral" "stone" "red" "orange" "amber" "yellow" "lime"
+##### [variable](1d33) `tailwind-merge/vars:*color-names*` ("slate" "gray" "zinc" "neutral" "stone" "red" "orange" "amber" "yellow" "lime"
  "green" "emerald" "teal" "cyan" "sky" "blue" "indigo" "violet" "purple"
  "fuchsia" "pink" "rose" "black" "white")
 
@@ -218,7 +218,7 @@ Tailwind`CSS` color names.
 
 <a id="x-28TAILWIND-MERGE-2FVARS-3A-2ACOLOR-SHADES-2A-20-28VARIABLE-29-29"></a>
 
-##### [variable](28d1) `tailwind-merge/vars:*color-shades*` ("50" "100" "200" "300" "400" "500" "600" "700" "800" "900" "950")
+##### [variable](abcc) `tailwind-merge/vars:*color-shades*` ("50" "100" "200" "300" "400" "500" "600" "700" "800" "900" "950")
 
 Tailwind`CSS` color names.
 
@@ -227,21 +227,21 @@ Tailwind`CSS` color names.
 [fdff]: https://40ants.com/tailwind-merge/#x-28TAILWIND-MERGE-2FMERGER-3AMERGE-TAILWIND-CLASSES-20FUNCTION-29
 [545c]: https://github.com/40ants/tailwind-merge
 [f62c]: https://github.com/40ants/tailwind-merge/actions
-[5abd]: https://github.com/40ants/tailwind-merge/blob/1e2baa237f640e4201149ade3449471cafeb4455/src/merger.lisp#L1
-[42e8]: https://github.com/40ants/tailwind-merge/blob/1e2baa237f640e4201149ade3449471cafeb4455/src/merger.lisp#L30
-[c218]: https://github.com/40ants/tailwind-merge/blob/1e2baa237f640e4201149ade3449471cafeb4455/src/validators.lisp#L1
-[5b0c]: https://github.com/40ants/tailwind-merge/blob/1e2baa237f640e4201149ade3449471cafeb4455/src/validators.lisp#L104
-[2f7b]: https://github.com/40ants/tailwind-merge/blob/1e2baa237f640e4201149ade3449471cafeb4455/src/validators.lisp#L131
-[bd14]: https://github.com/40ants/tailwind-merge/blob/1e2baa237f640e4201149ade3449471cafeb4455/src/validators.lisp#L31
-[9272]: https://github.com/40ants/tailwind-merge/blob/1e2baa237f640e4201149ade3449471cafeb4455/src/validators.lisp#L41
-[649e]: https://github.com/40ants/tailwind-merge/blob/1e2baa237f640e4201149ade3449471cafeb4455/src/validators.lisp#L52
-[3c85]: https://github.com/40ants/tailwind-merge/blob/1e2baa237f640e4201149ade3449471cafeb4455/src/validators.lisp#L68
-[56c1]: https://github.com/40ants/tailwind-merge/blob/1e2baa237f640e4201149ade3449471cafeb4455/src/validators.lisp#L83
-[00ef]: https://github.com/40ants/tailwind-merge/blob/1e2baa237f640e4201149ade3449471cafeb4455/src/validators.lisp#L94
-[b799]: https://github.com/40ants/tailwind-merge/blob/1e2baa237f640e4201149ade3449471cafeb4455/src/vars.lisp#L1
-[1287]: https://github.com/40ants/tailwind-merge/blob/1e2baa237f640e4201149ade3449471cafeb4455/src/vars.lisp#L14
-[28d1]: https://github.com/40ants/tailwind-merge/blob/1e2baa237f640e4201149ade3449471cafeb4455/src/vars.lisp#L19
-[76ab]: https://github.com/40ants/tailwind-merge/blob/1e2baa237f640e4201149ade3449471cafeb4455/src/vars.lisp#L9
+[a002]: https://github.com/40ants/tailwind-merge/blob/ce1706f003204187a664d10cfea3b9ad5032143b/src/merger.lisp#L1
+[127b]: https://github.com/40ants/tailwind-merge/blob/ce1706f003204187a664d10cfea3b9ad5032143b/src/merger.lisp#L30
+[c486]: https://github.com/40ants/tailwind-merge/blob/ce1706f003204187a664d10cfea3b9ad5032143b/src/validators.lisp#L1
+[4038]: https://github.com/40ants/tailwind-merge/blob/ce1706f003204187a664d10cfea3b9ad5032143b/src/validators.lisp#L104
+[69f3]: https://github.com/40ants/tailwind-merge/blob/ce1706f003204187a664d10cfea3b9ad5032143b/src/validators.lisp#L131
+[6858]: https://github.com/40ants/tailwind-merge/blob/ce1706f003204187a664d10cfea3b9ad5032143b/src/validators.lisp#L31
+[88bf]: https://github.com/40ants/tailwind-merge/blob/ce1706f003204187a664d10cfea3b9ad5032143b/src/validators.lisp#L41
+[ba3b]: https://github.com/40ants/tailwind-merge/blob/ce1706f003204187a664d10cfea3b9ad5032143b/src/validators.lisp#L52
+[202d]: https://github.com/40ants/tailwind-merge/blob/ce1706f003204187a664d10cfea3b9ad5032143b/src/validators.lisp#L68
+[e838]: https://github.com/40ants/tailwind-merge/blob/ce1706f003204187a664d10cfea3b9ad5032143b/src/validators.lisp#L83
+[2423]: https://github.com/40ants/tailwind-merge/blob/ce1706f003204187a664d10cfea3b9ad5032143b/src/validators.lisp#L94
+[7937]: https://github.com/40ants/tailwind-merge/blob/ce1706f003204187a664d10cfea3b9ad5032143b/src/vars.lisp#L1
+[3781]: https://github.com/40ants/tailwind-merge/blob/ce1706f003204187a664d10cfea3b9ad5032143b/src/vars.lisp#L14
+[abcc]: https://github.com/40ants/tailwind-merge/blob/ce1706f003204187a664d10cfea3b9ad5032143b/src/vars.lisp#L19
+[1d33]: https://github.com/40ants/tailwind-merge/blob/ce1706f003204187a664d10cfea3b9ad5032143b/src/vars.lisp#L9
 [4bec]: https://github.com/40ants/tailwind-merge/issues
 [8236]: https://quickdocs.org/alexandria
 [01db]: https://quickdocs.org/parse-number
