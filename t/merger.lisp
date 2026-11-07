@@ -87,6 +87,9 @@
   
   (ok (eql (parse-class "text-stone-300")
            :text-color))
+  
+  (ok (eql (parse-class "sticky")
+           :position))
 
   ;; (ok (eql (parse-class "text-stone-300")
   ;;          :text-color))

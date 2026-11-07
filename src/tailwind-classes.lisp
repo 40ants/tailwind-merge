@@ -1099,14 +1099,20 @@
   ;; Finds prefixes from string end to the start while searching a parser for the prefix.
 
   (flet ((search-for-class (prefix &optional value)
-           (let ((class-name-or-validators
+           (let ((class-names-or-class-names-with-validators
                    (gethash prefix map)))
-             (when class-name-or-validators
-               (loop for (class-name . validators) in class-name-or-validators
-                     do (loop for validator in validators
-                              always (funcall validator value)
-                              finally (return-from parse-class
-                                        class-name)))))))
+             (when class-names-or-class-names-with-validators
+               (loop for class-name-or-class-name-with-validators in class-names-or-class-names-with-validators
+                     do (etypecase class-name-or-class-name-with-validators
+                          (keyword (return-from parse-class
+                                     class-name-or-class-name-with-validators))
+                          (list
+                             (destructuring-bind (class-name . validators)
+                                 class-name-or-class-name-with-validators
+                               (loop for validator in validators
+                                     always (funcall validator value)
+                                     finally (return-from parse-class
+                                               class-name))))))))))
     (loop with end-pos = (length string)
           with separator-was-found = nil
           for separator-pos = (position #\- string

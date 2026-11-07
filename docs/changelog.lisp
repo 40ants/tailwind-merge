@@ -9,5 +9,7 @@
                               "ASDF"
                               "REPL"
                               "HTTP"))
+  (0.2.0 2026-11-07
+         "* Fixed class parsing error for simple classes without the validators.")
   (0.1.0 2023-02-05
          "* Initial version."))
